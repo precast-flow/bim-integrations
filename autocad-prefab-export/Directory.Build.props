@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Override: dotnet build -p:AcadInstallPath="C:\Program Files\Autodesk\AutoCAD 2022" -->
+    <AcadInstallPath Condition="'$(AcadInstallPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</AcadInstallPath>
+  </PropertyGroup>
+</Project>

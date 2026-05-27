@@ -1,0 +1,6 @@
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.csproj.AssemblyReference.cache
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.GeneratedMSBuildEditorConfig.editorconfig
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.AssemblyInfoInputs.cache
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.AssemblyInfo.cs
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.csproj.CoreCompileInputs.cache
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Release\net48\BimPrefabExport.sourcelink.json

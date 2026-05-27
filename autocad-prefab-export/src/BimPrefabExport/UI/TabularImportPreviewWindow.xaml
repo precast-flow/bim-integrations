@@ -1,0 +1,112 @@
+<Window x:Class="BimPrefabExport.UI.TabularImportPreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:BimPrefabExport.UI"
+        Title="Tablo içe aktarma — önizleme"
+        Height="460"
+        Width="720"
+        MinHeight="360"
+        MinWidth="520"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip"
+        Background="#F3F6F9"
+        Loaded="OnWindowLoaded">
+  <Window.Resources>
+    <ui:NullableDoubleConverter x:Key="NullableDoubleConverter" />
+  </Window.Resources>
+  <Grid Margin="12">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TextBlock x:Name="HintText"
+               Grid.Row="0"
+               TextWrapping="Wrap"
+               Margin="0,0,0,8"
+               FontSize="12.5"
+               Foreground="#323232" />
+
+    <CheckBox x:Name="SkipHeaderCheck"
+              Grid.Row="1"
+              Content="İlk satır başlık satırı (CSV / Excel’de sütun adları varsa işaretleyin)"
+              Margin="0,0,0,10"
+              IsChecked="True"
+              Checked="OnSkipHeaderChanged"
+              Unchecked="OnSkipHeaderChanged" />
+
+    <DataGrid x:Name="MaterialPreviewGrid"
+              Grid.Row="2"
+              Visibility="Collapsed"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              HeadersVisibility="Column"
+              GridLinesVisibility="Horizontal"
+              BorderBrush="#C8D0D8"
+              BorderThickness="1"
+              Background="White">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Kategori" Binding="{Binding Category}" Width="*" MinWidth="72" />
+        <DataGridTextColumn Header="Kod" Binding="{Binding Code}" Width="88" />
+        <DataGridTextColumn Header="Açıklama" Binding="{Binding Description}" Width="2*" MinWidth="80" />
+        <DataGridTextColumn Header="Miktar" Binding="{Binding Quantity}" Width="72" />
+        <DataGridTextColumn Header="Birim" Binding="{Binding Unit}" Width="56" />
+        <DataGridTextColumn Header="Not" Binding="{Binding Notes}" Width="*" MinWidth="50" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <DataGrid x:Name="RebarPreviewGrid"
+              Grid.Row="2"
+              Visibility="Collapsed"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              HeadersVisibility="Column"
+              GridLinesVisibility="Horizontal"
+              BorderBrush="#C8D0D8"
+              BorderThickness="1"
+              Background="White">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Poz" Binding="{Binding PozNo}" Width="*" MinWidth="72" />
+        <DataGridTextColumn Header="Çap (mm)"
+                            Binding="{Binding DiameterMm, Converter={StaticResource NullableDoubleConverter}}"
+                            Width="80" />
+        <DataGridTextColumn Header="Adet" Binding="{Binding Count}" Width="72" />
+        <DataGridTextColumn Header="H (mm)"
+                            Binding="{Binding LengthH_mm, Converter={StaticResource NullableDoubleConverter}}"
+                            Width="88" />
+        <DataGridTextColumn Header="L (mm)"
+                            Binding="{Binding LengthL_mm, Converter={StaticResource NullableDoubleConverter}}"
+                            Width="88" />
+        <DataGridTextColumn Header="Not" Binding="{Binding Notes}" Width="*" MinWidth="50" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <TextBlock x:Name="SummaryText"
+               Grid.Row="3"
+               Margin="0,10,0,8"
+               FontSize="12"
+               Foreground="#5A6570" />
+
+    <StackPanel Grid.Row="4"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+      <Button Content="İptal"
+              MinWidth="100"
+              Margin="0,0,10,0"
+              Padding="12,6"
+              IsCancel="True"
+              Click="OnCancelClick" />
+      <Button x:Name="OkImportButton"
+              Content="Listeye ekle"
+              MinWidth="120"
+              Padding="12,6"
+              IsDefault="True"
+              Click="OnOkClick" />
+    </StackPanel>
+  </Grid>
+</Window>

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/bim-prefab/manifest.v1.json",
+  "title": "BIM Prefab export manifest v1",
+  "type": "object",
+  "required": ["schemaVersion", "exportedAtUtc", "drawing", "products"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "exportedAtUtc": { "type": "string", "format": "date-time" },
+    "drawing": {
+      "type": "object",
+      "required": ["fileName"],
+      "properties": {
+        "fileName": { "type": "string" },
+        "databasePath": { "type": "string" }
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["productId", "revision", "contentHash", "displayName", "quantity", "unit", "attributes", "documents"],
+        "properties": {
+          "productId": { "type": "string", "format": "uuid" },
+          "revision": { "type": "integer" },
+          "contentHash": { "type": "string" },
+          "displayName": { "type": "string" },
+          "code": { "type": "string" },
+          "quantity": { "type": "number" },
+          "unit": { "type": "string" },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "path"],
+              "properties": {
+                "type": { "type": "string" },
+                "path": { "type": "string" },
+                "role": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sharedDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sharedDetailId", "path", "referencedByProductIds"],
+        "properties": {
+          "sharedDetailId": { "type": "string", "format": "uuid" },
+          "path": { "type": "string" },
+          "referencedByProductIds": {
+            "type": "array",
+            "items": { "type": "string", "format": "uuid" }
+          }
+        }
+      }
+    }
+  }
+}

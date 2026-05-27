@@ -1,0 +1,20 @@
+﻿BimPrefabExport
+0.1.0.0
+
+library
+C#
+.cs
+d:\My Projects\Cursor Projects\bim-integrations\autocad-prefab-export\src\BimPrefabExport\obj\Debug\net10.0-windows\
+BimPrefabExport
+none
+false
+TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+
+3-1020312561
+
+58988930246
+2201785489861
+UI\BimPrefabPaletteWindow.xaml;UI\SharedDrawingsWindow.xaml;UI\TabularImportPreviewWindow.xaml;
+
+False
+

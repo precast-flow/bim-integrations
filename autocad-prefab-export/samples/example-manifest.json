@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "exportedAtUtc": "2026-05-10T12:00:00.0000000Z",
+  "drawing": {
+    "fileName": "Drawing1.dwg",
+    "databasePath": "C:\\Projects\\Drawing1.dwg"
+  },
+  "products": [
+    {
+      "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "revision": 0,
+      "contentHash": "abcdef0123456789",
+      "displayName": "Kolon K-01",
+      "code": "K-01",
+      "quantity": 12,
+      "unit": "ea",
+      "attributes": {
+        "concreteClass": "C30/37"
+      },
+      "documents": []
+    }
+  ],
+  "sharedDetails": []
+}

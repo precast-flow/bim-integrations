@@ -58,7 +58,9 @@ internal static class PrefabExportInteraction
         Guid productId,
         string pdfDirectory,
         Editor ed,
-        out string? firstError)
+        out string? firstError,
+        IList<ExportDrawingEntry>? drawingIndex = null,
+        string pdfRelativePrefix = "PDF")
     {
         firstError = null;
         var ok = 0;
@@ -115,6 +117,16 @@ internal static class PrefabExportInteraction
 
             ProductPdfDrawingSync.TouchLastPdfExportUtc(doc, productId, fenceId);
             ok++;
+            var fileName = Path.GetFileName(path);
+            drawingIndex?.Add(new ExportDrawingEntry
+            {
+                ProductId = p.ProductId,
+                ProductCode = string.IsNullOrWhiteSpace(p.Code) ? p.DisplayName : p.Code,
+                FileName = fileName,
+                PdfTitle = spec.PdfTitle ?? "",
+                Revision = spec.PdfRevision,
+                RelativePath = $"{pdfRelativePrefix}/{fileName}".Replace('\\', '/'),
+            });
             ed.WriteMessage($"\n[BIM_PREFAB] PDF: {path}");
         }
 
@@ -304,11 +316,12 @@ internal static class PrefabExportInteraction
             var stem = Path.GetFileNameWithoutExtension(path);
             var baseNoExt = Path.Combine(dir, stem);
 
-            var (productsCsv, materialsCsv, rebarsCsv) = CsvListExportBuilder.Write(baseNoExt, summary, products);
+            var csvResult = CsvListExportBuilder.Write(baseNoExt, summary, products);
             ed.WriteMessage($"\n[BIM_PREFAB] CSV yazıldı ({products.Count} ürün):");
-            ed.WriteMessage($"\n  • {productsCsv}");
-            ed.WriteMessage($"\n  • {materialsCsv}");
-            ed.WriteMessage($"\n  • {rebarsCsv}");
+            ed.WriteMessage($"\n  • {csvResult.ProductsPath}");
+            ed.WriteMessage($"\n  • {csvResult.MaterialsPath}");
+            ed.WriteMessage($"\n  • {csvResult.RebarsPath}");
+            ed.WriteMessage($"\n  • {csvResult.DrawingsPath}");
         }
         catch (System.Exception ex)
         {
@@ -385,13 +398,13 @@ internal static class PrefabExportInteraction
             };
 
             var baseNoExt = Path.Combine(root, stem);
-            var (productsCsv, materialsCsv, rebarsCsv) = CsvListExportBuilder.Write(baseNoExt, summary, products);
+            var drawingIndex = new List<ExportDrawingEntry>();
 
             var ok = 0;
             var fail = 0;
             foreach (var p in products)
             {
-                var n = ExportAllPdfDrawingsForProduct(doc, p.ProductId, pdfDir, ed, out var err);
+                var n = ExportAllPdfDrawingsForProduct(doc, p.ProductId, pdfDir, ed, out var err, drawingIndex, "PDF");
                 if (n > 0)
                     ok += n;
                 else
@@ -401,10 +414,31 @@ internal static class PrefabExportInteraction
                 }
             }
 
+            var csvResult = CsvListExportBuilder.Write(baseNoExt, summary, products, drawingIndex);
+            var manifestPath = Path.Combine(root, "manifest.json");
+            ManifestBuilder.WriteManifestJson(manifestPath, summary, products, drawingIndex);
+
+            using (var tr = doc.Database.TransactionManager.StartTransaction())
+            {
+                var reg = new RegistryService();
+                foreach (var p in products)
+                {
+                    if (!reg.TryGetProduct(tr, doc.Database, p.ProductId, out var stored) || stored is null)
+                        continue;
+                    stored.LastExportedContentHash = p.LastExportedContentHash;
+                    stored.LastExportUtc = p.LastExportUtc;
+                    reg.SaveProduct(tr, doc.Database, stored);
+                }
+
+                tr.Commit();
+            }
+
             ed.WriteMessage($"\n[BIM_PREFAB] Paket klasörü: {root}");
-            ed.WriteMessage($"\n  • {productsCsv}");
-            ed.WriteMessage($"\n  • {materialsCsv}");
-            ed.WriteMessage($"\n  • {rebarsCsv}");
+            ed.WriteMessage($"\n  • {manifestPath}");
+            ed.WriteMessage($"\n  • {csvResult.ProductsPath}");
+            ed.WriteMessage($"\n  • {csvResult.MaterialsPath}");
+            ed.WriteMessage($"\n  • {csvResult.RebarsPath}");
+            ed.WriteMessage($"\n  • {csvResult.DrawingsPath}");
             ed.WriteMessage($"\n[BIM_PREFAB] PDF alt klasörü: {pdfDir} ({ok} dosya, {fail} ürün atlandı).");
 
             IReadOnlyList<SharedDrawingEntry> sharedList;

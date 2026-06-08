@@ -22,4 +22,8 @@ public sealed class MaterialLine
 
     [JsonPropertyName("notes")]
     public string Notes { get; set; } = "";
+
+    /// <summary>Malzeme kataloğu kodu (PrecastFlow eşlemesi).</summary>
+    [JsonPropertyName("materialCatalogCode")]
+    public string MaterialCatalogCode { get; set; } = "";
 }

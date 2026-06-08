@@ -94,6 +94,14 @@ public sealed class ProductRecord
     [JsonPropertyName("prefabTypologyId")]
     public string? PrefabTypologyId { get; set; }
 
+    /// <summary>Eleman kategorisi (superstructure, substructure, …) — PrecastFlow <c>ElementCategory</c>.</summary>
+    [JsonPropertyName("elementCategoryId")]
+    public string? ElementCategoryId { get; set; }
+
+    /// <summary>Ürün notu (PrecastFlow <c>note</c>).</summary>
+    [JsonPropertyName("note")]
+    public string Note { get; set; } = "";
+
     public static string Serialize(ProductRecord record)
     {
         return JsonSerializer.Serialize(record, JsonOptions);
@@ -159,6 +167,8 @@ public sealed class ProductRecord
                 ? null
                 : PrefabElementTypeId.Trim(),
             PrefabTypologyId = string.IsNullOrWhiteSpace(PrefabTypologyId) ? null : PrefabTypologyId.Trim(),
+            ElementCategoryId = string.IsNullOrWhiteSpace(ElementCategoryId) ? null : ElementCategoryId.Trim(),
+            Note = string.IsNullOrWhiteSpace(Note) ? null : Note.Trim(),
             Attributes = Attributes.OrderBy(kv => kv.Key, StringComparer.Ordinal)
                 .ToDictionary(kv => kv.Key, kv => kv.Value),
             DetailRefs = DetailRefs
@@ -170,7 +180,7 @@ public sealed class ProductRecord
             Materials = (Materials ?? [])
                 .OrderBy(m => m.Category, StringComparer.Ordinal)
                 .ThenBy(m => m.Code, StringComparer.Ordinal)
-                .Select(m => new { m.Category, m.Code, m.Description, m.Quantity, m.Unit, m.Notes })
+                .Select(m => new { m.Category, m.Code, m.Description, m.Quantity, m.Unit, m.Notes, m.MaterialCatalogCode })
                 .ToList(),
             Rebars = (Rebars ?? [])
                 .OrderBy(r => r.PozNo, StringComparer.OrdinalIgnoreCase)
@@ -183,6 +193,10 @@ public sealed class ProductRecord
                     r.LengthH_mm,
                     r.LengthL_mm,
                     r.Notes,
+                    r.SteelGrade,
+                    r.Shape,
+                    r.DevelopedLengthMm,
+                    r.TotalWeightKg,
                 })
                 .ToList(),
             LinkFences = LinkFences

@@ -38,6 +38,49 @@ internal sealed class AttributeCatalogService
 
     public IReadOnlyList<ElementTypeDefinition> ElementTypes => _root.ElementTypes;
 
+    public IReadOnlyList<CategoryDefinition> Categories => _root.Categories;
+
+    public IReadOnlyList<ElementTypeDefinition> GetElementTypesForCategory(string? categoryId)
+    {
+        if (string.IsNullOrWhiteSpace(categoryId))
+            return ElementTypes;
+        var cid = categoryId.Trim();
+        return ElementTypes
+            .Where(et => string.Equals(GetCategoryIdForElementType(et.Id), cid, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+    public string? GetCategoryIdForElementType(string? elementTypeId)
+    {
+        if (string.IsNullOrWhiteSpace(elementTypeId))
+            return null;
+        if (TryGetElementType(elementTypeId) is { } et && !string.IsNullOrWhiteSpace(et.CategoryId))
+            return et.CategoryId.Trim();
+        return DefaultCategoryForElementType(elementTypeId.Trim());
+    }
+
+    public string? GetDisplayNameForCategory(string? categoryId)
+    {
+        if (string.IsNullOrWhiteSpace(categoryId))
+            return null;
+        var key = categoryId.Trim();
+        foreach (var c in _root.Categories)
+        {
+            if (string.Equals(c.Id, key, StringComparison.OrdinalIgnoreCase))
+                return c.DisplayName;
+        }
+
+        return key;
+    }
+
+    private static string? DefaultCategoryForElementType(string elementTypeId) =>
+        elementTypeId switch
+        {
+            "col" or "beam" or "slab" or "wall" or "stair" or "landing" or "corbel" or "socket" or "truss" =>
+                "superstructure",
+            _ => "superstructure",
+        };
+
     public ElementTypeDefinition? TryGetElementType(string? id)
     {
         if (string.IsNullOrWhiteSpace(id))
@@ -157,6 +200,7 @@ internal sealed class AttributeCatalogService
         record.PrefabElementTypeId ??= firstEt.Id;
         var etCurrent = TryGetElementType(record.PrefabElementTypeId) ?? firstEt;
         record.PrefabElementTypeId = etCurrent.Id;
+        record.ElementCategoryId ??= GetCategoryIdForElementType(etCurrent.Id);
         var typs = GetTypologiesForElementType(etCurrent.Id);
         var pick = typs.FirstOrDefault(t =>
                        string.Equals(t.Id, record.PrefabTypologyId, StringComparison.OrdinalIgnoreCase))

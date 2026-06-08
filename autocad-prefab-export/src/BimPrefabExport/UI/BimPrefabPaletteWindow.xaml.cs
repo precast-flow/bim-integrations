@@ -22,6 +22,7 @@ public partial class BimPrefabPaletteWindow : Window
     private bool _loading;
     private bool _suppressSelectAll;
     private bool _paletteTypologyLoading;
+    private bool _paletteCategoryLoading;
     private bool _pdfDrawingUiSync;
     private System.Windows.Controls.Button? _uploadPdfButton;
 
@@ -36,7 +37,8 @@ public partial class BimPrefabPaletteWindow : Window
         _ = AttributeCatalogService.Default;
         TypologyAttributeGridSetup.ConfigureValueColumns(PaletteDimGrid);
         PaletteDimGrid.ItemsSource = _paletteDimRows;
-        PaletteElementTypeCombo.ItemsSource = AttributeCatalogService.Default.ElementTypes;
+        PopulatePaletteCategoryCombo();
+        RebarsGrid.CellEditEnding += OnRebarsGridCellEditEnding;
         BuildMainToolbar();
         BuildProductActionBar();
 
@@ -605,6 +607,7 @@ public partial class BimPrefabPaletteWindow : Window
                 CodeBox.Text = pi.Record.Code;
                 QtyBox.Text = pi.Record.Quantity.ToString(CultureInfo.CurrentCulture);
                 RevisionBox.Text = pi.Record.Revision.ToString(CultureInfo.CurrentCulture);
+                NoteBox.Text = pi.Record.Note ?? "";
                 RevisionBox.IsReadOnly = false;
                 MaterialsGrid.IsReadOnly = false;
                 MaterialsGrid.IsEnabled = true;
@@ -925,6 +928,7 @@ public partial class BimPrefabPaletteWindow : Window
             {
                 Category = m.Category,
                 Code = m.Code,
+                MaterialCatalogCode = m.MaterialCatalogCode,
                 Description = m.Description,
                 Quantity = m.Quantity,
                 Unit = m.Unit,
@@ -939,6 +943,7 @@ public partial class BimPrefabPaletteWindow : Window
         {
             Category = m.Category ?? "",
             Code = m.Code ?? "",
+            MaterialCatalogCode = m.MaterialCatalogCode ?? "",
             Description = m.Description ?? "",
             Quantity = m.Quantity,
             Unit = m.Unit ?? "",
@@ -949,9 +954,11 @@ public partial class BimPrefabPaletteWindow : Window
     private void LoadRebarsForProduct(ProductRecord record)
     {
         _rebars.Clear();
+        var poz = 0;
         foreach (var r in record.Rebars ?? [])
         {
-            _rebars.Add(new RebarLine
+            poz++;
+            var row = new RebarLine
             {
                 PozNo = r.PozNo,
                 DiameterMm = r.DiameterMm,
@@ -959,21 +966,93 @@ public partial class BimPrefabPaletteWindow : Window
                 LengthH_mm = r.LengthH_mm,
                 LengthL_mm = r.LengthL_mm,
                 Notes = r.Notes,
-            });
+                SteelGrade = r.SteelGrade,
+                Shape = r.Shape,
+                DevelopedLengthMm = r.DevelopedLengthMm,
+                TotalWeightKg = r.TotalWeightKg,
+            };
+            RebarWeightHelper.NormalizeRebarRow(row, poz);
+            _rebars.Add(row);
         }
     }
 
     private void CopyRebarsFromGridTo(ProductRecord target)
     {
-        target.Rebars = _rebars.Select(r => new RebarLine
+        var list = new List<RebarLine>();
+        var poz = 0;
+        foreach (var r in _rebars)
         {
-            PozNo = r.PozNo ?? "",
-            DiameterMm = r.DiameterMm,
-            Count = r.Count,
-            LengthH_mm = r.LengthH_mm,
-            LengthL_mm = r.LengthL_mm,
-            Notes = r.Notes ?? "",
-        }).ToList();
+            poz++;
+            var row = new RebarLine
+            {
+                PozNo = r.PozNo ?? "",
+                DiameterMm = r.DiameterMm,
+                Count = r.Count,
+                LengthH_mm = r.LengthH_mm,
+                LengthL_mm = r.LengthL_mm,
+                Notes = r.Notes ?? "",
+                SteelGrade = string.IsNullOrWhiteSpace(r.SteelGrade) ? "B500C" : r.SteelGrade,
+                Shape = string.IsNullOrWhiteSpace(r.Shape) ? "straight" : r.Shape,
+            };
+            RebarWeightHelper.NormalizeRebarRow(row, poz);
+            list.Add(row);
+        }
+
+        target.Rebars = list;
+    }
+
+    private void OnRebarsGridCellEditEnding(object? sender, DataGridCellEditEndingEventArgs e)
+    {
+        if (e.Row.Item is not RebarLine row)
+            return;
+        var poz = _rebars.IndexOf(row) + 1;
+        if (poz <= 0)
+            poz = 1;
+        RebarWeightHelper.NormalizeRebarRow(row, poz);
+        RebarsGrid.Items.Refresh();
+    }
+
+    private void PopulatePaletteCategoryCombo()
+    {
+        var cat = AttributeCatalogService.Default;
+        var categories = cat.Categories.Count > 0
+            ? cat.Categories.ToList()
+            :
+            [
+                new CategoryDefinition { Id = "superstructure", DisplayName = "Üstyapı" },
+                new CategoryDefinition { Id = "substructure", DisplayName = "Altyapı" },
+            ];
+        PaletteCategoryCombo.ItemsSource = categories;
+    }
+
+    private void PopulatePaletteElementTypeCombo(string? categoryId)
+    {
+        var list = AttributeCatalogService.Default.GetElementTypesForCategory(categoryId).ToList();
+        if (list.Count == 0)
+            list = AttributeCatalogService.Default.ElementTypes.ToList();
+        PaletteElementTypeCombo.ItemsSource = list;
+    }
+
+    private void OnPaletteCategoryComboSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!PaletteCategoryCombo.IsEnabled || _loading || _paletteCategoryLoading || _paletteTypologyLoading)
+            return;
+        if (PaletteCategoryCombo.SelectedItem is not CategoryDefinition catDef)
+            return;
+
+        _paletteCategoryLoading = true;
+        try
+        {
+            PopulatePaletteElementTypeCombo(catDef.Id);
+            if (ProductGrid.SelectedItem is ProductPaletteRow pi)
+                pi.Record.ElementCategoryId = catDef.Id;
+            if (PaletteElementTypeCombo.Items.Count > 0)
+                PaletteElementTypeCombo.SelectedIndex = 0;
+        }
+        finally
+        {
+            _paletteCategoryLoading = false;
+        }
     }
 
     private void ClearPaletteTypologyUi()
@@ -981,10 +1060,12 @@ public partial class BimPrefabPaletteWindow : Window
         _paletteTypologyLoading = true;
         try
         {
+            PaletteCategoryCombo.IsEnabled = true;
             PaletteElementTypeCombo.IsEnabled = false;
             PaletteTypologyCombo.IsEnabled = false;
             PaletteDimGrid.IsEnabled = false;
             _paletteDimRows.Clear();
+            PaletteElementTypeCombo.ItemsSource = null;
             PaletteElementTypeCombo.SelectedItem = null;
             PaletteTypologyCombo.ItemsSource = null;
             PaletteTypologyCombo.SelectedItem = null;
@@ -1003,6 +1084,7 @@ public partial class BimPrefabPaletteWindow : Window
             AttributeCatalogService.Default.ApplyDefaultPrefabSelection(record);
             SelectPaletteCombosFromRecord(record);
             RebuildPaletteAttributeRows(record);
+            PaletteCategoryCombo.IsEnabled = true;
             PaletteElementTypeCombo.IsEnabled = true;
             PaletteTypologyCombo.IsEnabled = true;
             PaletteDimGrid.IsEnabled = true;
@@ -1016,7 +1098,27 @@ public partial class BimPrefabPaletteWindow : Window
     private void SelectPaletteCombosFromRecord(ProductRecord record)
     {
         var cat = AttributeCatalogService.Default;
+        var categoryId = record.ElementCategoryId?.Trim()
+                         ?? cat.GetCategoryIdForElementType(record.PrefabElementTypeId)
+                         ?? "superstructure";
+        record.ElementCategoryId = categoryId;
+
+        _paletteCategoryLoading = true;
+        try
+        {
+            PopulatePaletteElementTypeCombo(categoryId);
+            var categories = PaletteCategoryCombo.ItemsSource?.Cast<CategoryDefinition>().ToList() ?? [];
+            PaletteCategoryCombo.SelectedItem = categories.FirstOrDefault(c =>
+                                                  string.Equals(c.Id, categoryId, StringComparison.OrdinalIgnoreCase))
+                                              ?? categories.FirstOrDefault();
+        }
+        finally
+        {
+            _paletteCategoryLoading = false;
+        }
+
         var et = cat.TryGetElementType(record.PrefabElementTypeId)
+                 ?? cat.GetElementTypesForCategory(categoryId).FirstOrDefault()
                  ?? cat.ElementTypes.FirstOrDefault();
         if (et is null)
             return;
@@ -1068,6 +1170,7 @@ public partial class BimPrefabPaletteWindow : Window
             return;
 
         pi.Record.PrefabElementTypeId = et.Id;
+        pi.Record.ElementCategoryId = AttributeCatalogService.Default.GetCategoryIdForElementType(et.Id);
         PopulatePaletteTypologyCombo(et.Id);
         var typ = (PaletteTypologyCombo.ItemsSource as IEnumerable<TypologyCatalogDefinition>)?.FirstOrDefault();
         PaletteTypologyCombo.SelectedItem = typ;
@@ -1223,10 +1326,11 @@ public partial class BimPrefabPaletteWindow : Window
 
             ApplyPdfDrawingUiToSelectedRecord(pi);
             current.DisplayName = string.IsNullOrWhiteSpace(NameBox.Text) ? current.DisplayName : NameBox.Text.Trim();
-            current.Code = CodeBox.Text?.Trim() ?? "";
+            current.Code = CodeBox.Text?.Trim().ToUpperInvariant() ?? "";
             current.Quantity = qty;
             current.Unit = "adet";
             current.Revision = revision;
+            current.Note = NoteBox.Text?.Trim() ?? "";
             CopyFenceAndPdfDrawingState(pi.Record, current);
             ProductPdfDrawingSync.NormalizeProductRecord(current);
             ProductPdfDrawingSync.SyncRootPlotFieldsFromFirstDrawing(current);

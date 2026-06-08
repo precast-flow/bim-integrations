@@ -1,23 +1,65 @@
 {
   "schemaVersion": 1,
-  "exportedAtUtc": "2026-05-10T12:00:00.0000000Z",
+  "exportedAtUtc": "2026-06-09T10:00:00.0000000Z",
   "drawing": {
-    "fileName": "Drawing1.dwg",
-    "databasePath": "C:\\Projects\\Drawing1.dwg"
+    "fileName": "Project_A.dwg",
+    "databasePath": "C:\\Projects\\Project_A.dwg"
   },
   "products": [
     {
-      "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "revision": 0,
-      "contentHash": "abcdef0123456789",
+      "productId": "11111111-1111-1111-1111-111111111111",
+      "revision": 1,
+      "contentHash": "hash-k01-abc123",
       "displayName": "Kolon K-01",
       "code": "K-01",
-      "quantity": 12,
+      "quantity": 4,
       "unit": "ea",
-      "attributes": {
-        "concreteClass": "C30/37"
-      },
-      "documents": []
+      "elementTypeId": "col",
+      "typologyId": "col-rect",
+      "elementCategoryId": "superstructure",
+      "lifecycleStatus": "tasarim",
+      "note": "Zemin kat",
+      "dimensions": { "width": 400, "depth": 400, "height": 3200 },
+      "materials": [
+        {
+          "category": "Beton",
+          "code": "C30/37",
+          "name": "C30/37 beton",
+          "quantity": 2.048,
+          "unit": "m³",
+          "volumeM3": 2.048,
+          "notes": "Ana gövde"
+        }
+      ],
+      "rebarSchedule": [
+        {
+          "position": "1",
+          "diameterMm": 16,
+          "steelGrade": "B500C",
+          "shape": "straight",
+          "developedLengthMm": 3200,
+          "count": 8,
+          "totalWeightKg": 40.32
+        }
+      ],
+      "documents": [
+        {
+          "type": "pdf",
+          "path": "PDF/K-01_plan_r1.pdf",
+          "productCode": "K-01",
+          "title": "plan",
+          "revision": 1,
+          "fileName": "K-01_plan_r1.pdf"
+        },
+        {
+          "type": "pdf",
+          "path": "PDF/K-01_section_r1.pdf",
+          "productCode": "K-01",
+          "title": "section",
+          "revision": 1,
+          "fileName": "K-01_section_r1.pdf"
+        }
+      ]
     }
   ],
   "sharedDetails": []

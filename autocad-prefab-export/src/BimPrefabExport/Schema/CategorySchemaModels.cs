@@ -12,6 +12,12 @@ public sealed class PrefabCatalogRoot
 
 {
 
+    [JsonPropertyName("categories")]
+
+    public List<CategoryDefinition> Categories { get; set; } = new();
+
+
+
     [JsonPropertyName("elementTypes")]
 
     public List<ElementTypeDefinition> ElementTypes { get; set; } = new();
@@ -32,6 +38,30 @@ public sealed class PrefabCatalogRoot
 
 
 
+public sealed class CategoryDefinition
+
+{
+
+    [JsonPropertyName("id")]
+
+    public string Id { get; set; } = "";
+
+
+
+    [JsonPropertyName("displayName")]
+
+    public string DisplayName { get; set; } = "";
+
+
+
+    [JsonPropertyName("displayNameEn")]
+
+    public string? DisplayNameEn { get; set; }
+
+}
+
+
+
 public sealed class ElementTypeDefinition
 
 {
@@ -39,6 +69,12 @@ public sealed class ElementTypeDefinition
     [JsonPropertyName("id")]
 
     public string Id { get; set; } = "";
+
+
+
+    [JsonPropertyName("categoryId")]
+
+    public string? CategoryId { get; set; }
 
 
 

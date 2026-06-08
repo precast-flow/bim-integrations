@@ -23,4 +23,16 @@ public sealed class RebarLine
 
     [JsonPropertyName("notes")]
     public string Notes { get; set; } = "";
+
+    [JsonPropertyName("steelGrade")]
+    public string SteelGrade { get; set; } = "B500C";
+
+    [JsonPropertyName("shape")]
+    public string Shape { get; set; } = "straight";
+
+    [JsonPropertyName("developedLengthMm")]
+    public double? DevelopedLengthMm { get; set; }
+
+    [JsonPropertyName("totalWeightKg")]
+    public double? TotalWeightKg { get; set; }
 }

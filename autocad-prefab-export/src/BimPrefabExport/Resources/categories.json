@@ -1,9 +1,60 @@
 {
+  "categories": [
+    { "id": "superstructure", "displayName": "Üstyapı", "displayNameEn": "Superstructure" },
+    { "id": "substructure", "displayName": "Altyapı", "displayNameEn": "Substructure" },
+    { "id": "environmental_protection", "displayName": "Çevre koruma", "displayNameEn": "Environmental protection" },
+    { "id": "landscaping", "displayName": "Peyzaj / çevre düzen", "displayNameEn": "Landscaping" },
+    { "id": "energy_carrier", "displayName": "Enerji nakil", "displayNameEn": "Energy carrier" },
+    { "id": "custom_prefab", "displayName": "Özel imalat", "displayNameEn": "Custom prefab" },
+    { "id": "industrial", "displayName": "Endüstriyel", "displayNameEn": "Industrial" },
+    { "id": "architectural", "displayName": "Mimari", "displayNameEn": "Architectural" }
+  ],
   "elementTypes": [
     {
+      "id": "en-trench",
+      "displayName": "Kablo Kanalı / Tranche",
+      "displayNameEn": "Cable trench unit"
+    },
+    {
+      "id": "cst-facade",
+      "displayName": "Özel Cephe Ünitesi",
+      "displayNameEn": "Custom facade unit"
+    },
+    {
+      "id": "land-curb",
+      "displayName": "Bordür Taşı",
+      "displayNameEn": "Kerb stone"
+    },
+    {
+      "id": "inf-pile-pre",
+      "displayName": "Fore Kazık (Prefabrik)",
+      "displayNameEn": "Precast driven pile"
+    },
+    {
       "id": "col",
+      "categoryId": "superstructure",
       "displayName": "Kolon",
       "displayNameEn": "Column"
+    },
+    {
+      "id": "env-noise-wall",
+      "displayName": "Gürültü Bariyeri Paneli",
+      "displayNameEn": "Noise barrier panel"
+    },
+    {
+      "id": "env-retain-seg",
+      "displayName": "İstinat Segmenti",
+      "displayNameEn": "Retaining wall segment"
+    },
+    {
+      "id": "cst-bridge-deck",
+      "displayName": "Köprü Deck Paneli",
+      "displayNameEn": "Bridge deck panel"
+    },
+    {
+      "id": "inf-pile-cap",
+      "displayName": "Kazık Başlığı",
+      "displayNameEn": "Pile cap"
     },
     {
       "id": "beam",
@@ -11,24 +62,74 @@
       "displayNameEn": "Beam"
     },
     {
+      "id": "en-vault",
+      "displayName": "Kablo Tavası",
+      "displayNameEn": "Cable tray segment"
+    },
+    {
+      "id": "land-paver",
+      "displayName": "Parke / Taş Slab",
+      "displayNameEn": "Paving slab"
+    },
+    {
       "id": "slab",
       "displayName": "Döşeme",
       "displayNameEn": "Slab"
     },
     {
+      "id": "cst-viaduct",
+      "displayName": "Viyadük Segmenti",
+      "displayNameEn": "Viaduct segment"
+    },
+    {
+      "id": "env-safety-plat",
+      "displayName": "Yüksek Güvenlik Bariyeri",
+      "displayNameEn": "Safety barrier segment"
+    },
+    {
+      "id": "land-tree-grate",
+      "displayName": "Ağaç Izgarası",
+      "displayNameEn": "Tree grille frame"
+    },
+    {
+      "id": "inf-strip-foot",
+      "displayName": "Şerit Temel",
+      "displayNameEn": "Strip footing"
+    },
+    {
+      "id": "en-hv-plinth",
+      "displayName": "Trafo Plintası",
+      "displayNameEn": "Transformer plinth"
+    },
+    {
+      "id": "inf-culvert",
+      "displayName": "Menfez / Kulp",
+      "displayNameEn": "Box culvert"
+    },
+    {
       "id": "wall",
-      "displayName": "Duvar",
-      "displayNameEn": "Wall"
+      "displayName": "Duvar Paneli",
+      "displayNameEn": "Wall Panel"
     },
     {
       "id": "stair",
       "displayName": "Merdiven",
-      "displayNameEn": "Stair"
+      "displayNameEn": "Stair Flight"
+    },
+    {
+      "id": "inf-manhole",
+      "displayName": "Menhol Gövdesi",
+      "displayNameEn": "Manhole chamber"
     },
     {
       "id": "landing",
       "displayName": "Sahanlık",
       "displayNameEn": "Landing"
+    },
+    {
+      "id": "inf-u-drain",
+      "displayName": "U Oluk / Drenaj Elemanı",
+      "displayNameEn": "U-channel drain"
     },
     {
       "id": "corbel",
@@ -37,25 +138,217 @@
     },
     {
       "id": "socket",
-      "displayName": "Soket",
-      "displayNameEn": "Socket"
+      "displayName": "Kolon Temel Soketi",
+      "displayNameEn": "Column Cup / Socket Footing"
     },
     {
       "id": "truss",
-      "displayName": "Makas",
-      "displayNameEn": "Truss"
+      "displayName": "Çatı Makası",
+      "displayNameEn": "Roof Truss / Girder"
+    },
+    {
+      "id": "ecb",
+      "displayName": "entegre contalı boru",
+      "displayNameEn": "entegre contalı boru"
     }
   ],
   "typologies": [
     {
-      "id": "col-rect",
+      "id": "beam-box",
+      "elementTypeId": "beam",
+      "displayName": "Kutu Kiriş",
+      "displayNameEn": "Box Beam",
+      "identifyingDimensions": [
+        "span",
+        "outerWidth",
+        "outerHeight",
+        "wallThickness"
+      ]
+    },
+    {
+      "id": "beam-cap",
+      "elementTypeId": "beam",
+      "displayName": "Başlık Kirişi",
+      "displayNameEn": "Cap / Hammerhead",
+      "identifyingDimensions": [
+        "span",
+        "height",
+        "width",
+        "corbelProjection"
+      ]
+    },
+    {
+      "id": "beam-crn",
+      "elementTypeId": "beam",
+      "displayName": "Vinç Kirişi",
+      "displayNameEn": "Crane Beam",
+      "identifyingDimensions": [
+        "span",
+        "width",
+        "height",
+        "railHeight",
+        "railWidth"
+      ]
+    },
+    {
+      "id": "beam-gtr",
+      "elementTypeId": "beam",
+      "displayName": "Oluk Kiriş",
+      "displayNameEn": "Gutter Beam",
+      "identifyingDimensions": [
+        "span",
+        "outerWidth",
+        "outerHeight",
+        "channelDepth",
+        "channelWidth"
+      ]
+    },
+    {
+      "id": "beam-i",
+      "elementTypeId": "beam",
+      "displayName": "I Kiriş",
+      "displayNameEn": "I-Beam",
+      "identifyingDimensions": [
+        "span",
+        "totalHeight",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness"
+      ]
+    },
+    {
+      "id": "beam-ig",
+      "elementTypeId": "beam",
+      "displayName": "I Çatı Makası",
+      "displayNameEn": "I-Roof Girder",
+      "identifyingDimensions": [
+        "span",
+        "startHeight",
+        "endHeight",
+        "flangeWidth",
+        "webThickness",
+        "flangeThickness"
+      ]
+    },
+    {
+      "id": "beam-it",
+      "elementTypeId": "beam",
+      "displayName": "Ters T Kiriş",
+      "displayNameEn": "Inverted-T Beam",
+      "identifyingDimensions": [
+        "span",
+        "totalHeight",
+        "bottomFlangeWidth",
+        "webWidth",
+        "flangeThickness"
+      ]
+    },
+    {
+      "id": "beam-l",
+      "elementTypeId": "beam",
+      "displayName": "L Kiriş",
+      "displayNameEn": "L-Beam",
+      "identifyingDimensions": [
+        "span",
+        "totalHeight",
+        "flangeWidth",
+        "webWidth",
+        "flangeThickness"
+      ]
+    },
+    {
+      "id": "beam-lnt",
+      "elementTypeId": "beam",
+      "displayName": "Lento",
+      "displayNameEn": "Lintel",
+      "identifyingDimensions": [
+        "span",
+        "width",
+        "height"
+      ]
+    },
+    {
+      "id": "beam-prl",
+      "elementTypeId": "beam",
+      "displayName": "Aşık",
+      "displayNameEn": "Purlin",
+      "identifyingDimensions": [
+        "span",
+        "width",
+        "height"
+      ]
+    },
+    {
+      "id": "beam-rect",
+      "elementTypeId": "beam",
+      "displayName": "Dikdörtgen Kiriş",
+      "displayNameEn": "Rectangular Beam",
+      "identifyingDimensions": [
+        "span",
+        "width",
+        "height"
+      ]
+    },
+    {
+      "id": "beam-spd",
+      "elementTypeId": "beam",
+      "displayName": "Söve / Parapet Kirişi",
+      "displayNameEn": "Spandrel Beam",
+      "identifyingDimensions": [
+        "span",
+        "height",
+        "width",
+        "upstandHeight"
+      ]
+    },
+    {
+      "id": "beam-t",
+      "elementTypeId": "beam",
+      "displayName": "T Kiriş",
+      "displayNameEn": "T-Beam",
+      "identifyingDimensions": [
+        "span",
+        "totalHeight",
+        "flangeWidth",
+        "webWidth",
+        "flangeThickness"
+      ]
+    },
+    {
+      "id": "beam-u",
+      "elementTypeId": "beam",
+      "displayName": "U / Oluk Kiriş",
+      "displayNameEn": "U / Channel Beam",
+      "identifyingDimensions": [
+        "span",
+        "totalHeight",
+        "outerWidth",
+        "wallThickness"
+      ]
+    },
+    {
+      "id": "beam-y",
+      "elementTypeId": "beam",
+      "displayName": "Y / Meyilli Makas Kiriş",
+      "displayNameEn": "Y / Tapered Roof Girder",
+      "identifyingDimensions": [
+        "span",
+        "startHeight",
+        "peakHeight",
+        "endHeight",
+        "width"
+      ]
+    },
+    {
+      "id": "col-arc",
       "elementTypeId": "col",
-      "displayName": "Dikdörtgen Kolon",
-      "displayNameEn": "Rectangular Column",
+      "displayName": "Mimari Kolon",
+      "displayNameEn": "Architectural Column",
       "identifyingDimensions": [
         "height",
         "sectionWidth",
-        "sectionDepth"
+        "sectionDepth",
+        "profileDescriptor"
       ]
     },
     {
@@ -66,16 +359,6 @@
       "identifyingDimensions": [
         "height",
         "diameter"
-      ]
-    },
-    {
-      "id": "col-sqr",
-      "elementTypeId": "col",
-      "displayName": "Kare Kolon",
-      "displayNameEn": "Square Column",
-      "identifyingDimensions": [
-        "height",
-        "sectionSize"
       ]
     },
     {
@@ -107,19 +390,6 @@
       ]
     },
     {
-      "id": "col-tpr",
-      "elementTypeId": "col",
-      "displayName": "Daralan Kolon",
-      "displayNameEn": "Tapered Column",
-      "identifyingDimensions": [
-        "height",
-        "baseWidth",
-        "baseDepth",
-        "topWidth",
-        "topDepth"
-      ]
-    },
-    {
       "id": "col-hol",
       "elementTypeId": "col",
       "displayName": "Boşluklu Kolon",
@@ -143,214 +413,94 @@
       ]
     },
     {
-      "id": "col-arc",
+      "id": "col-rect",
       "elementTypeId": "col",
-      "displayName": "Mimari Kolon",
-      "displayNameEn": "Architectural Column",
+      "displayName": "Dikdörtgen Kolon",
+      "displayNameEn": "Rectangular Column",
       "identifyingDimensions": [
         "height",
         "sectionWidth",
-        "sectionDepth",
-        "profileDescriptor"
+        "sectionDepth"
       ]
     },
     {
-      "id": "beam-rect",
-      "elementTypeId": "beam",
-      "displayName": "Dikdörtgen Kiriş",
-      "displayNameEn": "Rectangular Beam",
+      "id": "col-sqr",
+      "elementTypeId": "col",
+      "displayName": "Kare Kolon",
+      "displayNameEn": "Square Column",
       "identifyingDimensions": [
-        "span",
+        "height",
+        "sectionSize"
+      ]
+    },
+    {
+      "id": "col-tpr",
+      "elementTypeId": "col",
+      "displayName": "Daralan Kolon",
+      "displayNameEn": "Tapered Column",
+      "identifyingDimensions": [
+        "height",
+        "baseWidth",
+        "baseDepth",
+        "topWidth",
+        "topDepth"
+      ]
+    },
+    {
+      "id": "corbel-rect",
+      "elementTypeId": "corbel",
+      "displayName": "Dikdörtgen Konsol",
+      "displayNameEn": "Rectangular Corbel",
+      "identifyingDimensions": [
+        "projection",
         "width",
         "height"
       ]
     },
     {
-      "id": "beam-i",
-      "elementTypeId": "beam",
-      "displayName": "I Kiriş",
-      "displayNameEn": "I-Beam",
+      "id": "corbel-tpr",
+      "elementTypeId": "corbel",
+      "displayName": "Eğimli Konsol",
+      "displayNameEn": "Tapered Corbel",
       "identifyingDimensions": [
-        "span",
-        "totalHeight",
-        "flangeWidth",
-        "webThickness",
-        "flangeThickness"
+        "projection",
+        "width",
+        "rootHeight",
+        "tipHeight"
       ]
     },
     {
-      "id": "beam-t",
-      "elementTypeId": "beam",
-      "displayName": "T Kiriş",
-      "displayNameEn": "T-Beam",
+      "id": "ent-con-1.5",
+      "elementTypeId": "ecb",
+      "displayName": "1.5 metrelik boru",
+      "displayNameEn": "1.5 metrelik boru",
       "identifyingDimensions": [
-        "span",
-        "totalHeight",
-        "flangeWidth",
-        "webWidth",
-        "flangeThickness"
-      ]
-    },
-    {
-      "id": "beam-it",
-      "elementTypeId": "beam",
-      "displayName": "Ters T Kiriş",
-      "displayNameEn": "Inverted-T Beam",
-      "identifyingDimensions": [
-        "span",
-        "totalHeight",
-        "bottomFlangeWidth",
-        "webWidth",
-        "flangeThickness"
-      ]
-    },
-    {
-      "id": "beam-l",
-      "elementTypeId": "beam",
-      "displayName": "L Kiriş",
-      "displayNameEn": "L-Beam",
-      "identifyingDimensions": [
-        "span",
-        "totalHeight",
-        "flangeWidth",
-        "webWidth",
-        "flangeThickness"
-      ]
-    },
-    {
-      "id": "beam-u",
-      "elementTypeId": "beam",
-      "displayName": "U / Oluk Kiriş",
-      "displayNameEn": "U / Channel Beam",
-      "identifyingDimensions": [
-        "span",
-        "totalHeight",
-        "outerWidth",
-        "wallThickness"
-      ]
-    },
-    {
-      "id": "beam-box",
-      "elementTypeId": "beam",
-      "displayName": "Kutu Kiriş",
-      "displayNameEn": "Box Beam",
-      "identifyingDimensions": [
-        "span",
-        "outerWidth",
-        "outerHeight",
-        "wallThickness"
-      ]
-    },
-    {
-      "id": "beam-gtr",
-      "elementTypeId": "beam",
-      "displayName": "Oluk Kiriş",
-      "displayNameEn": "Gutter Beam",
-      "identifyingDimensions": [
-        "span",
-        "outerWidth",
-        "outerHeight",
-        "channelDepth",
-        "channelWidth"
-      ]
-    },
-    {
-      "id": "beam-y",
-      "elementTypeId": "beam",
-      "displayName": "Y / Meyilli Makas Kiriş",
-      "displayNameEn": "Y / Tapered Roof Girder",
-      "identifyingDimensions": [
-        "span",
-        "startHeight",
-        "peakHeight",
-        "endHeight",
-        "width"
-      ]
-    },
-    {
-      "id": "beam-ig",
-      "elementTypeId": "beam",
-      "displayName": "I Çatı Makası",
-      "displayNameEn": "I-Roof Girder",
-      "identifyingDimensions": [
-        "span",
-        "startHeight",
-        "endHeight",
-        "flangeWidth",
-        "webThickness",
-        "flangeThickness"
-      ]
-    },
-    {
-      "id": "beam-spd",
-      "elementTypeId": "beam",
-      "displayName": "Söve / Parapet Kirişi",
-      "displayNameEn": "Spandrel Beam",
-      "identifyingDimensions": [
-        "span",
         "height",
-        "width",
-        "upstandHeight"
+        "baseWidth",
+        "baseDepth"
       ]
     },
     {
-      "id": "beam-cap",
-      "elementTypeId": "beam",
-      "displayName": "Başlık Kirişi",
-      "displayNameEn": "Cap / Hammerhead",
+      "id": "landing-l",
+      "elementTypeId": "landing",
+      "displayName": "L Sahanlık",
+      "displayNameEn": "L-Landing",
       "identifyingDimensions": [
-        "span",
-        "height",
+        "legA",
+        "legB",
         "width",
-        "corbelProjection"
+        "thickness"
       ]
     },
     {
-      "id": "beam-prl",
-      "elementTypeId": "beam",
-      "displayName": "Aşık",
-      "displayNameEn": "Purlin",
-      "identifyingDimensions": [
-        "span",
-        "width",
-        "height"
-      ]
-    },
-    {
-      "id": "beam-crn",
-      "elementTypeId": "beam",
-      "displayName": "Vinç Kirişi",
-      "displayNameEn": "Crane Beam",
-      "identifyingDimensions": [
-        "span",
-        "width",
-        "height",
-        "railHeight",
-        "railWidth"
-      ]
-    },
-    {
-      "id": "beam-lnt",
-      "elementTypeId": "beam",
-      "displayName": "Lento",
-      "displayNameEn": "Lintel",
-      "identifyingDimensions": [
-        "span",
-        "width",
-        "height"
-      ]
-    },
-    {
-      "id": "slab-hc",
-      "elementTypeId": "slab",
-      "displayName": "Hollow Core Döşeme",
-      "displayNameEn": "Hollow Core Slab",
+      "id": "landing-rect",
+      "elementTypeId": "landing",
+      "displayName": "Dikdörtgen Sahanlık",
+      "displayNameEn": "Rectangular Landing",
       "identifyingDimensions": [
         "length",
         "width",
-        "thickness",
-        "coreCount",
-        "coreDiameter"
+        "thickness"
       ]
     },
     {
@@ -368,30 +518,6 @@
       ]
     },
     {
-      "id": "slab-st",
-      "elementTypeId": "slab",
-      "displayName": "Tek T Döşeme",
-      "displayNameEn": "Single-Tee Slab",
-      "identifyingDimensions": [
-        "length",
-        "width",
-        "depth",
-        "flangeThickness",
-        "stemWidth"
-      ]
-    },
-    {
-      "id": "slab-sol",
-      "elementTypeId": "slab",
-      "displayName": "Masif Döşeme",
-      "displayNameEn": "Solid Slab",
-      "identifyingDimensions": [
-        "length",
-        "width",
-        "thickness"
-      ]
-    },
-    {
       "id": "slab-fil",
       "elementTypeId": "slab",
       "displayName": "Filigran / Yarı Dolu",
@@ -401,6 +527,31 @@
         "width",
         "precastThickness",
         "toppingThickness"
+      ]
+    },
+    {
+      "id": "slab-hc",
+      "elementTypeId": "slab",
+      "displayName": "Hollow Core Döşeme",
+      "displayNameEn": "Hollow Core Slab",
+      "identifyingDimensions": [
+        "length",
+        "width",
+        "thickness",
+        "coreCount",
+        "coreDiameter"
+      ]
+    },
+    {
+      "id": "slab-rf",
+      "elementTypeId": "slab",
+      "displayName": "Çatı Döşemesi",
+      "displayNameEn": "Roof Slab",
+      "identifyingDimensions": [
+        "length",
+        "width",
+        "thickness",
+        "slopeAngle"
       ]
     },
     {
@@ -418,39 +569,133 @@
       ]
     },
     {
-      "id": "slab-rf",
+      "id": "slab-sol",
       "elementTypeId": "slab",
-      "displayName": "Çatı Döşemesi",
-      "displayNameEn": "Roof Slab",
+      "displayName": "Masif Döşeme",
+      "displayNameEn": "Solid Slab",
       "identifyingDimensions": [
         "length",
         "width",
-        "thickness",
-        "slopeAngle"
-      ]
-    },
-    {
-      "id": "wall-sol",
-      "elementTypeId": "wall",
-      "displayName": "Masif Duvar Paneli",
-      "displayNameEn": "Solid Wall Panel",
-      "identifyingDimensions": [
-        "length",
-        "height",
         "thickness"
       ]
     },
     {
-      "id": "wall-swp",
-      "elementTypeId": "wall",
-      "displayName": "Sandviç Panel",
-      "displayNameEn": "Sandwich Wall Panel",
+      "id": "slab-st",
+      "elementTypeId": "slab",
+      "displayName": "Tek T Döşeme",
+      "displayNameEn": "Single-Tee Slab",
       "identifyingDimensions": [
         "length",
+        "width",
+        "depth",
+        "flangeThickness",
+        "stemWidth"
+      ]
+    },
+    {
+      "id": "socket-cup",
+      "elementTypeId": "socket",
+      "displayName": "Soket Temel",
+      "displayNameEn": "Cup / Socket Footing",
+      "identifyingDimensions": [
+        "outerLength",
+        "outerWidth",
+        "totalHeight",
+        "socketLength",
+        "socketWidth",
+        "socketDepth"
+      ]
+    },
+    {
+      "id": "stair-l",
+      "elementTypeId": "stair",
+      "displayName": "L Merdiven",
+      "displayNameEn": "L-Shaped Stair",
+      "identifyingDimensions": [
+        "runA",
+        "runB",
+        "totalRise",
+        "width",
+        "stepCount",
+        "landingPosition"
+      ]
+    },
+    {
+      "id": "stair-spr",
+      "elementTypeId": "stair",
+      "displayName": "Helezon Merdiven",
+      "displayNameEn": "Spiral Stair",
+      "identifyingDimensions": [
+        "outerDiameter",
+        "innerDiameter",
+        "totalRise",
+        "stepCount",
+        "totalAngle"
+      ]
+    },
+    {
+      "id": "stair-str",
+      "elementTypeId": "stair",
+      "displayName": "Düz Kollu Merdiven",
+      "displayNameEn": "Straight Flight",
+      "identifyingDimensions": [
+        "totalRun",
+        "totalRise",
+        "width",
+        "stepCount",
+        "treadDepth",
+        "riserHeight"
+      ]
+    },
+    {
+      "id": "stair-u",
+      "elementTypeId": "stair",
+      "displayName": "U / Geri Dönüşlü Merdiven",
+      "displayNameEn": "Half-Turn / Switchback",
+      "identifyingDimensions": [
+        "runA",
+        "runB",
+        "totalRise",
+        "width",
+        "stepCount",
+        "gapWidth"
+      ]
+    },
+    {
+      "id": "truss-flt",
+      "elementTypeId": "truss",
+      "displayName": "Düz Makas",
+      "displayNameEn": "Flat Truss",
+      "identifyingDimensions": [
+        "span",
         "height",
-        "innerThickness",
-        "coreThickness",
-        "outerThickness"
+        "width"
+      ]
+    },
+    {
+      "id": "truss-gbl",
+      "elementTypeId": "truss",
+      "displayName": "Beşik Makas",
+      "displayNameEn": "Gable Truss",
+      "identifyingDimensions": [
+        "span",
+        "eaveHeight",
+        "peakHeight",
+        "width",
+        "slopeAngle"
+      ]
+    },
+    {
+      "id": "truss-y",
+      "elementTypeId": "truss",
+      "displayName": "Y Makas",
+      "displayNameEn": "Y-Truss",
+      "identifyingDimensions": [
+        "span",
+        "startHeight",
+        "peakHeight",
+        "endHeight",
+        "width"
       ]
     },
     {
@@ -478,10 +723,22 @@
       ]
     },
     {
-      "id": "wall-shr",
+      "id": "wall-l",
       "elementTypeId": "wall",
-      "displayName": "Perde Duvar",
-      "displayNameEn": "Shear Wall Panel",
+      "displayName": "L Profil Duvar",
+      "displayNameEn": "L-Profile Wall",
+      "identifyingDimensions": [
+        "extrusionHeight",
+        "legA",
+        "legB",
+        "thickness"
+      ]
+    },
+    {
+      "id": "wall-prp",
+      "elementTypeId": "wall",
+      "displayName": "Parapet",
+      "displayNameEn": "Parapet Panel",
       "identifyingDimensions": [
         "length",
         "height",
@@ -493,17 +750,6 @@
       "elementTypeId": "wall",
       "displayName": "Bölme Duvar",
       "displayNameEn": "Partition Wall",
-      "identifyingDimensions": [
-        "length",
-        "height",
-        "thickness"
-      ]
-    },
-    {
-      "id": "wall-prp",
-      "elementTypeId": "wall",
-      "displayName": "Parapet",
-      "displayNameEn": "Parapet Panel",
       "identifyingDimensions": [
         "length",
         "height",
@@ -524,15 +770,38 @@
       ]
     },
     {
-      "id": "wall-l",
+      "id": "wall-shr",
       "elementTypeId": "wall",
-      "displayName": "L Profil Duvar",
-      "displayNameEn": "L-Profile Wall",
+      "displayName": "Perde Duvar",
+      "displayNameEn": "Shear Wall Panel",
       "identifyingDimensions": [
-        "extrusionHeight",
-        "legA",
-        "legB",
+        "length",
+        "height",
         "thickness"
+      ]
+    },
+    {
+      "id": "wall-sol",
+      "elementTypeId": "wall",
+      "displayName": "Masif Duvar Paneli",
+      "displayNameEn": "Solid Wall Panel",
+      "identifyingDimensions": [
+        "length",
+        "height",
+        "thickness"
+      ]
+    },
+    {
+      "id": "wall-swp",
+      "elementTypeId": "wall",
+      "displayName": "Sandviç Panel",
+      "displayNameEn": "Sandwich Wall Panel",
+      "identifyingDimensions": [
+        "length",
+        "height",
+        "innerThickness",
+        "coreThickness",
+        "outerThickness"
       ]
     },
     {
@@ -547,174 +816,77 @@
         "legC",
         "thickness"
       ]
-    },
-    {
-      "id": "stair-str",
-      "elementTypeId": "stair",
-      "displayName": "Düz Kollu Merdiven",
-      "displayNameEn": "Straight Flight",
-      "identifyingDimensions": [
-        "totalRun",
-        "totalRise",
-        "width",
-        "stepCount",
-        "treadDepth",
-        "riserHeight"
-      ]
-    },
-    {
-      "id": "stair-l",
-      "elementTypeId": "stair",
-      "displayName": "L Merdiven",
-      "displayNameEn": "L-Shaped Stair",
-      "identifyingDimensions": [
-        "runA",
-        "runB",
-        "totalRise",
-        "width",
-        "stepCount",
-        "landingPosition"
-      ]
-    },
-    {
-      "id": "stair-u",
-      "elementTypeId": "stair",
-      "displayName": "U / Geri Dönüşlü Merdiven",
-      "displayNameEn": "Half-Turn / Switchback",
-      "identifyingDimensions": [
-        "runA",
-        "runB",
-        "totalRise",
-        "width",
-        "stepCount",
-        "gapWidth"
-      ]
-    },
-    {
-      "id": "stair-spr",
-      "elementTypeId": "stair",
-      "displayName": "Helezon Merdiven",
-      "displayNameEn": "Spiral Stair",
-      "identifyingDimensions": [
-        "outerDiameter",
-        "innerDiameter",
-        "totalRise",
-        "stepCount",
-        "totalAngle"
-      ]
-    },
-    {
-      "id": "landing-rect",
-      "elementTypeId": "landing",
-      "displayName": "Dikdörtgen Sahanlık",
-      "displayNameEn": "Rectangular Landing",
-      "identifyingDimensions": [
-        "length",
-        "width",
-        "thickness"
-      ]
-    },
-    {
-      "id": "landing-l",
-      "elementTypeId": "landing",
-      "displayName": "L Sahanlık",
-      "displayNameEn": "L-Landing",
-      "identifyingDimensions": [
-        "legA",
-        "legB",
-        "width",
-        "thickness"
-      ]
-    },
-    {
-      "id": "corbel-rect",
-      "elementTypeId": "corbel",
-      "displayName": "Dikdörtgen Konsol",
-      "displayNameEn": "Rectangular Corbel",
-      "identifyingDimensions": [
-        "projection",
-        "width",
-        "height"
-      ]
-    },
-    {
-      "id": "corbel-tpr",
-      "elementTypeId": "corbel",
-      "displayName": "Eğimli Konsol",
-      "displayNameEn": "Tapered Corbel",
-      "identifyingDimensions": [
-        "projection",
-        "width",
-        "rootHeight",
-        "tipHeight"
-      ]
-    },
-    {
-      "id": "socket-cup",
-      "elementTypeId": "socket",
-      "displayName": "Soket Temel",
-      "displayNameEn": "Cup / Socket Footing",
-      "identifyingDimensions": [
-        "outerLength",
-        "outerWidth",
-        "totalHeight",
-        "socketLength",
-        "socketWidth",
-        "socketDepth"
-      ]
-    },
-    {
-      "id": "truss-flt",
-      "elementTypeId": "truss",
-      "displayName": "Düz Makas",
-      "displayNameEn": "Flat Truss",
-      "identifyingDimensions": [
-        "span",
-        "height",
-        "width"
-      ]
-    },
-    {
-      "id": "truss-y",
-      "elementTypeId": "truss",
-      "displayName": "Y Makas",
-      "displayNameEn": "Y-Truss",
-      "identifyingDimensions": [
-        "span",
-        "startHeight",
-        "peakHeight",
-        "endHeight",
-        "width"
-      ]
-    },
-    {
-      "id": "truss-gbl",
-      "elementTypeId": "truss",
-      "displayName": "Beşik Makas",
-      "displayNameEn": "Gable Truss",
-      "identifyingDimensions": [
-        "span",
-        "eaveHeight",
-        "peakHeight",
-        "width",
-        "slopeAngle"
-      ]
     }
   ],
   "dimensionFields": {
-    "height": {
-      "tag": "height",
-      "label": "Yükseklik",
+    "baseDepth": {
+      "tag": "baseDepth",
+      "label": "Taban Derinliği",
       "type": "number"
     },
-    "sectionWidth": {
-      "tag": "sectionWidth",
-      "label": "Kesit genişliği",
+    "baseWidth": {
+      "tag": "baseWidth",
+      "label": "Taban Genişliği",
       "type": "number"
     },
-    "sectionDepth": {
-      "tag": "sectionDepth",
-      "label": "Kesit derinliği",
+    "bottomFlangeWidth": {
+      "tag": "bottomFlangeWidth",
+      "label": "Alt Başlık Genişliği",
+      "type": "number"
+    },
+    "channelDepth": {
+      "tag": "channelDepth",
+      "label": "Oluk Derinliği",
+      "type": "number"
+    },
+    "channelWidth": {
+      "tag": "channelWidth",
+      "label": "Oluk Genişliği",
+      "type": "number"
+    },
+    "corbelHeight": {
+      "tag": "corbelHeight",
+      "label": "Guse Yüksekliği",
+      "type": "number"
+    },
+    "corbelLevel": {
+      "tag": "corbelLevel",
+      "label": "Guse Seviyesi",
+      "type": "number"
+    },
+    "corbelProjection": {
+      "tag": "corbelProjection",
+      "label": "Guse Çıkıntısı",
+      "type": "number"
+    },
+    "corbelWidth": {
+      "tag": "corbelWidth",
+      "label": "Guse Genişliği",
+      "type": "number"
+    },
+    "coreCount": {
+      "tag": "coreCount",
+      "label": "Çekirdek Sayısı",
+      "type": "number"
+    },
+    "coreDiameter": {
+      "tag": "coreDiameter",
+      "label": "Çekirdek Çapı",
+      "type": "number"
+    },
+    "coreShape": {
+      "tag": "coreShape",
+      "label": "Çekirdek Biçimi",
+      "type": "number"
+    },
+    "coreThickness": {
+      "tag": "coreThickness",
+      "label": "Çekirdek Kalınlığı",
+      "type": "number"
+    },
+    "depth": {
+      "tag": "depth",
+      "label": "Derinlik",
       "type": "number"
     },
     "diameter": {
@@ -722,164 +894,89 @@
       "label": "Çap",
       "type": "number"
     },
-    "sectionSize": {
-      "tag": "sectionSize",
-      "label": "Kesit boyutu (kare)",
-      "type": "number"
-    },
-    "corbelWidth": {
-      "tag": "corbelWidth",
-      "label": "Guse genişliği",
-      "type": "number"
-    },
-    "corbelHeight": {
-      "tag": "corbelHeight",
-      "label": "Guse yüksekliği",
-      "type": "number"
-    },
-    "corbelProjection": {
-      "tag": "corbelProjection",
-      "label": "Guse çıkıntısı",
-      "type": "number"
-    },
-    "corbelLevel": {
-      "tag": "corbelLevel",
-      "label": "Guse kotu",
-      "type": "number"
-    },
-    "forkDepth": {
-      "tag": "forkDepth",
-      "label": "Çatal derinliği",
-      "type": "number"
-    },
-    "forkOpening": {
-      "tag": "forkOpening",
-      "label": "Çatal açıklığı",
-      "type": "number"
-    },
-    "baseWidth": {
-      "tag": "baseWidth",
-      "label": "Taban genişliği",
-      "type": "number"
-    },
-    "baseDepth": {
-      "tag": "baseDepth",
-      "label": "Taban derinliği",
-      "type": "number"
-    },
-    "topWidth": {
-      "tag": "topWidth",
-      "label": "Üst genişlik",
-      "type": "number"
-    },
-    "topDepth": {
-      "tag": "topDepth",
-      "label": "Üst derinlik",
-      "type": "number"
-    },
-    "outerWidth": {
-      "tag": "outerWidth",
-      "label": "Dış genişlik",
-      "type": "number"
-    },
-    "outerDepth": {
-      "tag": "outerDepth",
-      "label": "Dış derinlik",
-      "type": "number"
-    },
-    "wallThickness": {
-      "tag": "wallThickness",
-      "label": "Duvar kalınlığı",
-      "type": "number"
-    },
-    "profileDescriptor": {
-      "tag": "profileDescriptor",
-      "label": "Profil tanımı",
-      "type": "string"
-    },
-    "span": {
-      "tag": "span",
-      "label": "Açıklık",
-      "type": "number"
-    },
-    "width": {
-      "tag": "width",
-      "label": "Genişlik",
-      "type": "number"
-    },
-    "totalHeight": {
-      "tag": "totalHeight",
-      "label": "Toplam yükseklik",
-      "type": "number"
-    },
-    "flangeWidth": {
-      "tag": "flangeWidth",
-      "label": "Başlık genişliği",
-      "type": "number"
-    },
-    "webThickness": {
-      "tag": "webThickness",
-      "label": "Gövde kalınlığı",
-      "type": "number"
-    },
-    "flangeThickness": {
-      "tag": "flangeThickness",
-      "label": "Başlık kalınlığı",
-      "type": "number"
-    },
-    "webWidth": {
-      "tag": "webWidth",
-      "label": "Gövde genişliği",
-      "type": "number"
-    },
-    "bottomFlangeWidth": {
-      "tag": "bottomFlangeWidth",
-      "label": "Alt başlık genişliği",
-      "type": "number"
-    },
-    "outerHeight": {
-      "tag": "outerHeight",
-      "label": "Dış yükseklik",
-      "type": "number"
-    },
-    "channelDepth": {
-      "tag": "channelDepth",
-      "label": "Oluk derinliği",
-      "type": "number"
-    },
-    "channelWidth": {
-      "tag": "channelWidth",
-      "label": "Oluk genişliği",
-      "type": "number"
-    },
-    "startHeight": {
-      "tag": "startHeight",
-      "label": "Başlangıç yüksekliği",
-      "type": "number"
-    },
-    "peakHeight": {
-      "tag": "peakHeight",
-      "label": "Tepe yüksekliği",
+    "eaveHeight": {
+      "tag": "eaveHeight",
+      "label": "Saçak Yüksekliği",
       "type": "number"
     },
     "endHeight": {
       "tag": "endHeight",
-      "label": "Bitiş yüksekliği",
+      "label": "Bitiş Yüksekliği",
       "type": "number"
     },
-    "upstandHeight": {
-      "tag": "upstandHeight",
-      "label": "Alınlık yüksekliği",
+    "extrusionHeight": {
+      "tag": "extrusionHeight",
+      "label": "Extrusion Yüksekliği",
       "type": "number"
     },
-    "railHeight": {
-      "tag": "railHeight",
-      "label": "Ray yüksekliği",
+    "flangeThickness": {
+      "tag": "flangeThickness",
+      "label": "Başlık Kalınlığı",
       "type": "number"
     },
-    "railWidth": {
-      "tag": "railWidth",
-      "label": "Ray genişliği",
+    "flangeWidth": {
+      "tag": "flangeWidth",
+      "label": "Başlık Genişliği",
+      "type": "number"
+    },
+    "forkDepth": {
+      "tag": "forkDepth",
+      "label": "Çatal Derinliği",
+      "type": "number"
+    },
+    "forkOpening": {
+      "tag": "forkOpening",
+      "label": "Çatal Açıklığı",
+      "type": "number"
+    },
+    "gapWidth": {
+      "tag": "gapWidth",
+      "label": "Boşluk Genişliği",
+      "type": "number"
+    },
+    "heelWidth": {
+      "tag": "heelWidth",
+      "label": "Topuk Genişliği",
+      "type": "number"
+    },
+    "height": {
+      "tag": "height",
+      "label": "Yükseklik",
+      "type": "number"
+    },
+    "innerDiameter": {
+      "tag": "innerDiameter",
+      "label": "İç Çap",
+      "type": "number"
+    },
+    "innerThickness": {
+      "tag": "innerThickness",
+      "label": "İç Katman Kalınlığı",
+      "type": "number"
+    },
+    "keyDepth": {
+      "tag": "keyDepth",
+      "label": "Kilit Derinliği",
+      "type": "number"
+    },
+    "landingPosition": {
+      "tag": "landingPosition",
+      "label": "Sahanlık Konumu",
+      "type": "number"
+    },
+    "legA": {
+      "tag": "legA",
+      "label": "A Bacak",
+      "type": "number"
+    },
+    "legB": {
+      "tag": "legB",
+      "label": "B Bacak",
+      "type": "number"
+    },
+    "legC": {
+      "tag": "legC",
+      "label": "C Bacak",
       "type": "number"
     },
     "length": {
@@ -887,184 +984,49 @@
       "label": "Uzunluk",
       "type": "number"
     },
-    "thickness": {
-      "tag": "thickness",
-      "label": "Kalınlık",
-      "type": "number"
-    },
-    "coreCount": {
-      "tag": "coreCount",
-      "label": "Boşluk sayısı",
-      "type": "number"
-    },
-    "coreDiameter": {
-      "tag": "coreDiameter",
-      "label": "Boşluk çapı",
-      "type": "number"
-    },
-    "depth": {
-      "tag": "depth",
-      "label": "Derinlik (kesit)",
-      "type": "number"
-    },
-    "stemWidth": {
-      "tag": "stemWidth",
-      "label": "Gövde (stem) genişliği",
-      "type": "number"
-    },
-    "stemCount": {
-      "tag": "stemCount",
-      "label": "Gövde sayısı",
-      "type": "number"
-    },
-    "precastThickness": {
-      "tag": "precastThickness",
-      "label": "Prefab kalınlığı",
-      "type": "number"
-    },
-    "toppingThickness": {
-      "tag": "toppingThickness",
-      "label": "Saha döküm kalınlığı",
-      "type": "number"
-    },
-    "ribHeight": {
-      "tag": "ribHeight",
-      "label": "Nervür yüksekliği",
-      "type": "number"
-    },
-    "ribSpacing": {
-      "tag": "ribSpacing",
-      "label": "Nervür aralığı",
-      "type": "number"
-    },
-    "ribCount": {
-      "tag": "ribCount",
-      "label": "Nervür sayısı",
-      "type": "number"
-    },
-    "slopeAngle": {
-      "tag": "slopeAngle",
-      "label": "Eğim açısı (°)",
-      "type": "number"
-    },
-    "innerThickness": {
-      "tag": "innerThickness",
-      "label": "İç tabaka kalınlığı",
-      "type": "number"
-    },
-    "coreThickness": {
-      "tag": "coreThickness",
-      "label": "Çekirdek kalınlığı",
-      "type": "number"
-    },
-    "outerThickness": {
-      "tag": "outerThickness",
-      "label": "Dış tabaka kalınlığı",
-      "type": "number"
-    },
-    "surfaceFinish": {
-      "tag": "surfaceFinish",
-      "label": "Yüzey bitimi",
-      "type": "string"
-    },
-    "shellThickness": {
-      "tag": "shellThickness",
-      "label": "Kabuk kalınlığı",
-      "type": "number"
-    },
-    "ribThickness": {
-      "tag": "ribThickness",
-      "label": "Nervür / kaburga kalınlığı",
-      "type": "number"
-    },
-    "heelWidth": {
-      "tag": "heelWidth",
-      "label": "Topuk genişliği",
-      "type": "number"
-    },
-    "keyDepth": {
-      "tag": "keyDepth",
-      "label": "Anahtar derinliği",
-      "type": "number"
-    },
-    "extrusionHeight": {
-      "tag": "extrusionHeight",
-      "label": "Ekstrüzyon yüksekliği",
-      "type": "number"
-    },
-    "legA": {
-      "tag": "legA",
-      "label": "Bacak A",
-      "type": "number"
-    },
-    "legB": {
-      "tag": "legB",
-      "label": "Bacak B",
-      "type": "number"
-    },
-    "legC": {
-      "tag": "legC",
-      "label": "Bacak C",
-      "type": "number"
-    },
-    "totalRun": {
-      "tag": "totalRun",
-      "label": "Toplam yatay mesafe",
-      "type": "number"
-    },
-    "totalRise": {
-      "tag": "totalRise",
-      "label": "Toplam yükseliş",
-      "type": "number"
-    },
-    "stepCount": {
-      "tag": "stepCount",
-      "label": "Basamak sayısı",
-      "type": "number"
-    },
-    "treadDepth": {
-      "tag": "treadDepth",
-      "label": "Basamak derinliği",
-      "type": "number"
-    },
-    "riserHeight": {
-      "tag": "riserHeight",
-      "label": "Riser yüksekliği",
-      "type": "number"
-    },
-    "runA": {
-      "tag": "runA",
-      "label": "Kol A açıklığı",
-      "type": "number"
-    },
-    "runB": {
-      "tag": "runB",
-      "label": "Kol B açıklığı",
-      "type": "number"
-    },
-    "landingPosition": {
-      "tag": "landingPosition",
-      "label": "Sahanlık konumu",
-      "type": "number"
-    },
-    "gapWidth": {
-      "tag": "gapWidth",
-      "label": "Boşluk genişliği",
+    "outerDepth": {
+      "tag": "outerDepth",
+      "label": "Dış Derinlik",
       "type": "number"
     },
     "outerDiameter": {
       "tag": "outerDiameter",
-      "label": "Dış çap",
+      "label": "Dış Çap",
       "type": "number"
     },
-    "innerDiameter": {
-      "tag": "innerDiameter",
-      "label": "İç çap",
+    "outerHeight": {
+      "tag": "outerHeight",
+      "label": "Dış Yükseklik",
       "type": "number"
     },
-    "totalAngle": {
-      "tag": "totalAngle",
-      "label": "Toplam dönüş açısı (°)",
+    "outerLength": {
+      "tag": "outerLength",
+      "label": "Dış Uzunluk",
+      "type": "number"
+    },
+    "outerThickness": {
+      "tag": "outerThickness",
+      "label": "Dış Katman Kalınlığı",
+      "type": "number"
+    },
+    "outerWidth": {
+      "tag": "outerWidth",
+      "label": "Dış Genişlik",
+      "type": "number"
+    },
+    "peakHeight": {
+      "tag": "peakHeight",
+      "label": "Tepe Yüksekliği",
+      "type": "number"
+    },
+    "precastThickness": {
+      "tag": "precastThickness",
+      "label": "Ön Döküm Kalınlığı",
+      "type": "number"
+    },
+    "profileDescriptor": {
+      "tag": "profileDescriptor",
+      "label": "Profil Tanımı",
       "type": "number"
     },
     "projection": {
@@ -1072,39 +1034,199 @@
       "label": "Çıkıntı",
       "type": "number"
     },
+    "railHeight": {
+      "tag": "railHeight",
+      "label": "Ray Yüksekliği",
+      "type": "number"
+    },
+    "railWidth": {
+      "tag": "railWidth",
+      "label": "Ray Genişliği",
+      "type": "number"
+    },
+    "ribCount": {
+      "tag": "ribCount",
+      "label": "Nervür Sayısı",
+      "type": "number"
+    },
+    "ribHeight": {
+      "tag": "ribHeight",
+      "label": "Nervür Yüksekliği",
+      "type": "number"
+    },
+    "ribSpacing": {
+      "tag": "ribSpacing",
+      "label": "Nervür Aralığı",
+      "type": "number"
+    },
+    "ribThickness": {
+      "tag": "ribThickness",
+      "label": "Nervür Kalınlığı",
+      "type": "number"
+    },
+    "riserHeight": {
+      "tag": "riserHeight",
+      "label": "Rıht Yüksekliği",
+      "type": "number"
+    },
     "rootHeight": {
       "tag": "rootHeight",
-      "label": "Kök yüksekliği",
+      "label": "Kök Yüksekliği",
       "type": "number"
     },
-    "tipHeight": {
-      "tag": "tipHeight",
-      "label": "Uç yüksekliği",
+    "runA": {
+      "tag": "runA",
+      "label": "A Kolu Uzunluğu",
       "type": "number"
     },
-    "outerLength": {
-      "tag": "outerLength",
-      "label": "Dış uzunluk",
+    "runB": {
+      "tag": "runB",
+      "label": "B Kolu Uzunluğu",
       "type": "number"
     },
-    "socketLength": {
-      "tag": "socketLength",
-      "label": "Soket uzunluğu",
+    "sectionDepth": {
+      "tag": "sectionDepth",
+      "label": "Kesit Derinliği",
       "type": "number"
     },
-    "socketWidth": {
-      "tag": "socketWidth",
-      "label": "Soket genişliği",
+    "sectionSize": {
+      "tag": "sectionSize",
+      "label": "Kesit Boyutu (Kare)",
+      "type": "number"
+    },
+    "sectionWidth": {
+      "tag": "sectionWidth",
+      "label": "Kesit Genişliği",
+      "type": "number"
+    },
+    "shellThickness": {
+      "tag": "shellThickness",
+      "label": "Kabuk Kalınlığı",
+      "type": "number"
+    },
+    "slopeAngle": {
+      "tag": "slopeAngle",
+      "label": "Eğim Açısı",
       "type": "number"
     },
     "socketDepth": {
       "tag": "socketDepth",
-      "label": "Soket derinliği",
+      "label": "Soket Derinliği",
       "type": "number"
     },
-    "eaveHeight": {
-      "tag": "eaveHeight",
-      "label": "Saçak yüksekliği",
+    "socketLength": {
+      "tag": "socketLength",
+      "label": "Soket Uzunluğu",
+      "type": "number"
+    },
+    "socketWidth": {
+      "tag": "socketWidth",
+      "label": "Soket Genişliği",
+      "type": "number"
+    },
+    "span": {
+      "tag": "span",
+      "label": "Açıklık",
+      "type": "number"
+    },
+    "startHeight": {
+      "tag": "startHeight",
+      "label": "Başlangıç Yüksekliği",
+      "type": "number"
+    },
+    "stemCount": {
+      "tag": "stemCount",
+      "label": "Ayak Sayısı",
+      "type": "number"
+    },
+    "stemWidth": {
+      "tag": "stemWidth",
+      "label": "Ayak Genişliği",
+      "type": "number"
+    },
+    "stepCount": {
+      "tag": "stepCount",
+      "label": "Basamak Sayısı",
+      "type": "number"
+    },
+    "surfaceFinish": {
+      "tag": "surfaceFinish",
+      "label": "Yüzey Dokusu",
+      "type": "number"
+    },
+    "thickness": {
+      "tag": "thickness",
+      "label": "Kalınlık",
+      "type": "number"
+    },
+    "tipHeight": {
+      "tag": "tipHeight",
+      "label": "Uç Yüksekliği",
+      "type": "number"
+    },
+    "topDepth": {
+      "tag": "topDepth",
+      "label": "Üst Derinlik",
+      "type": "number"
+    },
+    "toppingThickness": {
+      "tag": "toppingThickness",
+      "label": "Tepe Kalınlığı",
+      "type": "number"
+    },
+    "topWidth": {
+      "tag": "topWidth",
+      "label": "Üst Genişlik",
+      "type": "number"
+    },
+    "totalAngle": {
+      "tag": "totalAngle",
+      "label": "Toplam Açı",
+      "type": "number"
+    },
+    "totalHeight": {
+      "tag": "totalHeight",
+      "label": "Toplam Yükseklik",
+      "type": "number"
+    },
+    "totalRise": {
+      "tag": "totalRise",
+      "label": "Toplam Dikey Mesafe",
+      "type": "number"
+    },
+    "totalRun": {
+      "tag": "totalRun",
+      "label": "Toplam Yatay Mesafe",
+      "type": "number"
+    },
+    "treadDepth": {
+      "tag": "treadDepth",
+      "label": "Basamak Derinliği",
+      "type": "number"
+    },
+    "upstandHeight": {
+      "tag": "upstandHeight",
+      "label": "Söve Yüksekliği",
+      "type": "number"
+    },
+    "wallThickness": {
+      "tag": "wallThickness",
+      "label": "Duvar Kalınlığı",
+      "type": "number"
+    },
+    "webThickness": {
+      "tag": "webThickness",
+      "label": "Gövde Kalınlığı",
+      "type": "number"
+    },
+    "webWidth": {
+      "tag": "webWidth",
+      "label": "Gövde Genişliği",
+      "type": "number"
+    },
+    "width": {
+      "tag": "width",
+      "label": "Genişlik",
       "type": "number"
     }
   }

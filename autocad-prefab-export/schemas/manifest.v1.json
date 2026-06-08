@@ -28,9 +28,50 @@
           "code": { "type": "string" },
           "quantity": { "type": "number" },
           "unit": { "type": "string" },
+          "elementTypeId": { "type": "string" },
+          "typologyId": { "type": "string" },
+          "elementCategoryId": { "type": "string" },
+          "lifecycleStatus": { "type": "string" },
+          "note": { "type": "string" },
           "attributes": {
             "type": "object",
             "additionalProperties": { "type": "string" }
+          },
+          "dimensions": {
+            "type": "object",
+            "additionalProperties": { "type": "number" }
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": { "type": "string" },
+                "code": { "type": "string" },
+                "name": { "type": "string" },
+                "quantity": { "type": "number" },
+                "unit": { "type": "string" },
+                "notes": { "type": "string" },
+                "materialCatalogCode": { "type": "string" },
+                "volumeM3": { "type": "number" }
+              }
+            }
+          },
+          "rebarSchedule": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "position": { "type": "string" },
+                "diameterMm": { "type": "number" },
+                "steelGrade": { "type": "string" },
+                "shape": { "type": "string" },
+                "developedLengthMm": { "type": "number" },
+                "count": { "type": "integer" },
+                "totalWeightKg": { "type": "number" },
+                "notes": { "type": "string" }
+              }
+            }
           },
           "documents": {
             "type": "array",
@@ -40,7 +81,11 @@
               "properties": {
                 "type": { "type": "string" },
                 "path": { "type": "string" },
-                "role": { "type": "string" }
+                "role": { "type": "string" },
+                "productCode": { "type": "string" },
+                "title": { "type": "string" },
+                "revision": { "type": "integer" },
+                "fileName": { "type": "string" }
               }
             }
           }

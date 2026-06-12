@@ -1,31 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "D:\\My Projects\\Cursor Projects\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj": {}
+    "C:\\Mac\\Home\\Documents\\projects\\startups\\precast-app\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj": {}
   },
   "projects": {
-    "D:\\My Projects\\Cursor Projects\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj": {
+    "C:\\Mac\\Home\\Documents\\projects\\startups\\precast-app\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\My Projects\\Cursor Projects\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj",
+        "projectUniqueName": "C:\\Mac\\Home\\Documents\\projects\\startups\\precast-app\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj",
         "projectName": "BimPrefabExport",
-        "projectPath": "D:\\My Projects\\Cursor Projects\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj",
-        "packagesPath": "C:\\Users\\etmax\\.nuget\\packages\\",
-        "outputPath": "D:\\My Projects\\Cursor Projects\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\obj\\",
+        "projectPath": "C:\\Mac\\Home\\Documents\\projects\\startups\\precast-app\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\BimPrefabExport.csproj",
+        "packagesPath": "C:\\WINDOWS\\system32\\config\\systemprofile\\.nuget\\packages\\",
+        "outputPath": "C:\\Mac\\Home\\Documents\\projects\\startups\\precast-app\\bim-integrations\\autocad-prefab-export\\src\\BimPrefabExport\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\etmax\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0-windows7.0": {
+          "net10.0-windows": {
+            "framework": "net10.0-windows7.0",
             "targetAlias": "net10.0-windows",
             "projectReferences": {}
           }
@@ -40,10 +39,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
-        "net10.0-windows7.0": {
+        "net10.0-windows": {
+          "framework": "net10.0-windows7.0",
           "targetAlias": "net10.0-windows",
           "dependencies": {
             "ExcelDataReader": {
@@ -74,7 +74,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

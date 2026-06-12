@@ -73,13 +73,25 @@ internal sealed class AttributeCatalogService
         return key;
     }
 
-    private static string? DefaultCategoryForElementType(string elementTypeId) =>
-        elementTypeId switch
-        {
-            "col" or "beam" or "slab" or "wall" or "stair" or "landing" or "corbel" or "socket" or "truss" =>
-                "superstructure",
-            _ => "superstructure",
-        };
+    private static string? DefaultCategoryForElementType(string elementTypeId)
+    {
+        if (string.IsNullOrWhiteSpace(elementTypeId))
+            return null;
+        var id = elementTypeId.Trim();
+        if (id is "col" or "beam" or "slab" or "wall" or "stair" or "landing" or "corbel" or "socket" or "truss")
+            return "superstructure";
+        if (id.StartsWith("inf-", StringComparison.OrdinalIgnoreCase))
+            return "substructure";
+        if (id.StartsWith("env-", StringComparison.OrdinalIgnoreCase))
+            return "environmental_protection";
+        if (id.StartsWith("land-", StringComparison.OrdinalIgnoreCase))
+            return "landscaping";
+        if (id.StartsWith("en-", StringComparison.OrdinalIgnoreCase))
+            return "energy_carrier";
+        if (id.StartsWith("cst-", StringComparison.OrdinalIgnoreCase))
+            return "custom_prefab";
+        return null;
+    }
 
     public ElementTypeDefinition? TryGetElementType(string? id)
     {

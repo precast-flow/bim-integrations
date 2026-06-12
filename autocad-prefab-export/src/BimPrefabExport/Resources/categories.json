@@ -1,34 +1,70 @@
 {
   "categories": [
-    { "id": "superstructure", "displayName": "Üstyapı", "displayNameEn": "Superstructure" },
-    { "id": "substructure", "displayName": "Altyapı", "displayNameEn": "Substructure" },
-    { "id": "environmental_protection", "displayName": "Çevre koruma", "displayNameEn": "Environmental protection" },
-    { "id": "landscaping", "displayName": "Peyzaj / çevre düzen", "displayNameEn": "Landscaping" },
-    { "id": "energy_carrier", "displayName": "Enerji nakil", "displayNameEn": "Energy carrier" },
-    { "id": "custom_prefab", "displayName": "Özel imalat", "displayNameEn": "Custom prefab" },
-    { "id": "industrial", "displayName": "Endüstriyel", "displayNameEn": "Industrial" },
-    { "id": "architectural", "displayName": "Mimari", "displayNameEn": "Architectural" }
+    {
+      "id": "superstructure",
+      "displayName": "Üstyapı",
+      "displayNameEn": "Superstructure"
+    },
+    {
+      "id": "substructure",
+      "displayName": "Altyapı",
+      "displayNameEn": "Substructure"
+    },
+    {
+      "id": "environmental_protection",
+      "displayName": "Çevre koruma",
+      "displayNameEn": "Environmental protection"
+    },
+    {
+      "id": "landscaping",
+      "displayName": "Peyzaj / çevre düzen",
+      "displayNameEn": "Landscaping"
+    },
+    {
+      "id": "energy_carrier",
+      "displayName": "Enerji nakil",
+      "displayNameEn": "Energy carrier"
+    },
+    {
+      "id": "custom_prefab",
+      "displayName": "Özel imalat",
+      "displayNameEn": "Custom prefab"
+    },
+    {
+      "id": "industrial",
+      "displayName": "Endüstriyel",
+      "displayNameEn": "Industrial"
+    },
+    {
+      "id": "architectural",
+      "displayName": "Mimari",
+      "displayNameEn": "Architectural"
+    }
   ],
   "elementTypes": [
     {
       "id": "en-trench",
       "displayName": "Kablo Kanalı / Tranche",
-      "displayNameEn": "Cable trench unit"
+      "displayNameEn": "Cable trench unit",
+      "categoryId": "energy_carrier"
     },
     {
       "id": "cst-facade",
       "displayName": "Özel Cephe Ünitesi",
-      "displayNameEn": "Custom facade unit"
+      "displayNameEn": "Custom facade unit",
+      "categoryId": "custom_prefab"
     },
     {
       "id": "land-curb",
       "displayName": "Bordür Taşı",
-      "displayNameEn": "Kerb stone"
+      "displayNameEn": "Kerb stone",
+      "categoryId": "landscaping"
     },
     {
       "id": "inf-pile-pre",
       "displayName": "Fore Kazık (Prefabrik)",
-      "displayNameEn": "Precast driven pile"
+      "displayNameEn": "Precast driven pile",
+      "categoryId": "substructure"
     },
     {
       "id": "col",
@@ -39,112 +75,134 @@
     {
       "id": "env-noise-wall",
       "displayName": "Gürültü Bariyeri Paneli",
-      "displayNameEn": "Noise barrier panel"
+      "displayNameEn": "Noise barrier panel",
+      "categoryId": "environmental_protection"
     },
     {
       "id": "env-retain-seg",
       "displayName": "İstinat Segmenti",
-      "displayNameEn": "Retaining wall segment"
+      "displayNameEn": "Retaining wall segment",
+      "categoryId": "environmental_protection"
     },
     {
       "id": "cst-bridge-deck",
       "displayName": "Köprü Deck Paneli",
-      "displayNameEn": "Bridge deck panel"
+      "displayNameEn": "Bridge deck panel",
+      "categoryId": "custom_prefab"
     },
     {
       "id": "inf-pile-cap",
       "displayName": "Kazık Başlığı",
-      "displayNameEn": "Pile cap"
+      "displayNameEn": "Pile cap",
+      "categoryId": "substructure"
     },
     {
       "id": "beam",
       "displayName": "Kiriş",
-      "displayNameEn": "Beam"
+      "displayNameEn": "Beam",
+      "categoryId": "superstructure"
     },
     {
       "id": "en-vault",
       "displayName": "Kablo Tavası",
-      "displayNameEn": "Cable tray segment"
+      "displayNameEn": "Cable tray segment",
+      "categoryId": "energy_carrier"
     },
     {
       "id": "land-paver",
       "displayName": "Parke / Taş Slab",
-      "displayNameEn": "Paving slab"
+      "displayNameEn": "Paving slab",
+      "categoryId": "landscaping"
     },
     {
       "id": "slab",
       "displayName": "Döşeme",
-      "displayNameEn": "Slab"
+      "displayNameEn": "Slab",
+      "categoryId": "superstructure"
     },
     {
       "id": "cst-viaduct",
       "displayName": "Viyadük Segmenti",
-      "displayNameEn": "Viaduct segment"
+      "displayNameEn": "Viaduct segment",
+      "categoryId": "custom_prefab"
     },
     {
       "id": "env-safety-plat",
       "displayName": "Yüksek Güvenlik Bariyeri",
-      "displayNameEn": "Safety barrier segment"
+      "displayNameEn": "Safety barrier segment",
+      "categoryId": "environmental_protection"
     },
     {
       "id": "land-tree-grate",
       "displayName": "Ağaç Izgarası",
-      "displayNameEn": "Tree grille frame"
+      "displayNameEn": "Tree grille frame",
+      "categoryId": "landscaping"
     },
     {
       "id": "inf-strip-foot",
       "displayName": "Şerit Temel",
-      "displayNameEn": "Strip footing"
+      "displayNameEn": "Strip footing",
+      "categoryId": "substructure"
     },
     {
       "id": "en-hv-plinth",
       "displayName": "Trafo Plintası",
-      "displayNameEn": "Transformer plinth"
+      "displayNameEn": "Transformer plinth",
+      "categoryId": "energy_carrier"
     },
     {
       "id": "inf-culvert",
       "displayName": "Menfez / Kulp",
-      "displayNameEn": "Box culvert"
+      "displayNameEn": "Box culvert",
+      "categoryId": "substructure"
     },
     {
       "id": "wall",
       "displayName": "Duvar Paneli",
-      "displayNameEn": "Wall Panel"
+      "displayNameEn": "Wall Panel",
+      "categoryId": "superstructure"
     },
     {
       "id": "stair",
       "displayName": "Merdiven",
-      "displayNameEn": "Stair Flight"
+      "displayNameEn": "Stair Flight",
+      "categoryId": "superstructure"
     },
     {
       "id": "inf-manhole",
       "displayName": "Menhol Gövdesi",
-      "displayNameEn": "Manhole chamber"
+      "displayNameEn": "Manhole chamber",
+      "categoryId": "substructure"
     },
     {
       "id": "landing",
       "displayName": "Sahanlık",
-      "displayNameEn": "Landing"
+      "displayNameEn": "Landing",
+      "categoryId": "superstructure"
     },
     {
       "id": "inf-u-drain",
       "displayName": "U Oluk / Drenaj Elemanı",
-      "displayNameEn": "U-channel drain"
+      "displayNameEn": "U-channel drain",
+      "categoryId": "substructure"
     },
     {
       "id": "corbel",
       "displayName": "Konsol",
-      "displayNameEn": "Corbel"
+      "displayNameEn": "Corbel",
+      "categoryId": "superstructure"
     },
     {
       "id": "socket",
       "displayName": "Kolon Temel Soketi",
-      "displayNameEn": "Column Cup / Socket Footing"
+      "displayNameEn": "Column Cup / Socket Footing",
+      "categoryId": "superstructure"
     },
     {
       "id": "truss",
       "displayName": "Çatı Makası",
-      "displayNameEn": "Roof Truss / Girder"
+      "displayNameEn": "Roof Truss / Girder",
+      "categoryId": "superstructure"
     },
     {
       "id": "ecb",

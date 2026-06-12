@@ -37,13 +37,20 @@ public class PrefabCommands
 
         DrawingInitService.EnsureInit(doc);
         var id = PrefabUiSession.SelectedProductId.Value;
-        var count = RectangleLinkService.AssignByClosedPolyline(doc, id, PrefabUiSession.DefaultRole, out var err);
-        if (err is not null)
-            doc.Editor.WriteMessage("\n[BIM_PREFAB] " + err);
-        else if (count == 0 && !RegistryHasProduct(doc, id))
-            doc.Editor.WriteMessage("\n[BIM_PREFAB] Ürün çizimde bulunamadı (registry).");
-
-        PrefabPalette.TryRefresh();
+        PrefabPalette.BeginInteractivePick();
+        try
+        {
+            var count = RectangleLinkService.AssignByClosedPolyline(doc, id, PrefabUiSession.DefaultRole, out var err);
+            if (err is not null)
+                doc.Editor.WriteMessage("\n[BIM_PREFAB] " + err);
+            else if (count == 0 && !RegistryHasProduct(doc, id))
+                doc.Editor.WriteMessage("\n[BIM_PREFAB] Ürün çizimde bulunamadı (registry).");
+        }
+        finally
+        {
+            PrefabPalette.EndInteractivePick();
+            PrefabPalette.TryRefresh();
+        }
     }
 
     [CommandMethod("BIM_PREFAB_SHARED_DRAWINGS")]

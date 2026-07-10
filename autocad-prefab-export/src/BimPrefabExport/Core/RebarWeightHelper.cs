@@ -5,6 +5,10 @@ namespace BimPrefabExport.Core;
 /// <summary>TS 708 uyumlu donatı birim ağırlığı — frontend rebarUnitWeights.ts ile aynı mantık.</summary>
 public static class RebarWeightHelper
 {
+    /// <summary>Frontend <c>STANDARD_REBAR_DIAMETERS_MM</c> ile aynı.</summary>
+    public static readonly double[] StandardDiametersMm =
+        [6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 25, 26, 28, 30, 32, 36, 40, 50];
+
     private static readonly Dictionary<int, double> UnitWeightTableKgPerM = new()
     {
         [6] = 0.222,

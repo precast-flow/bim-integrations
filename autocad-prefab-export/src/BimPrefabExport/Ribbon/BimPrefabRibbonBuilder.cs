@@ -7,7 +7,7 @@ namespace BimPrefabExport.Ribbon;
 internal static class BimPrefabRibbonBuilder
 {
     /// <summary>Yapı değişince artırın; aksi halde eski ribbon sekmesi önbellekte kalır.</summary>
-    private const string TabId = "BIM_PREFAB_TAB_V6";
+    private const string TabId = "BIM_PREFAB_TAB_V7";
 
     public static void EnsureTab()
     {
@@ -29,6 +29,11 @@ internal static class BimPrefabRibbonBuilder
 
         var palettePanel = new RibbonPanelSource { Title = "Palet" };
         palettePanel.Items.Add(Large("Palet", "BIM_PREFAB_PANEL", "Ürün paletini açar (diğer komutlar palet içindedir).", RibbonIconFactory.Palette()));
+        palettePanel.Items.Add(Large(
+            "PrecastFlow'a bağlan",
+            "BIM_PREFAB_LOGIN",
+            "PrecastFlow sunucusuna giriş yapın ve proje seçin.",
+            RibbonIconFactory.Palette()));
         tab.Panels.Add(new RibbonPanel { Source = palettePanel });
 
         var drawingsPanel = new RibbonPanelSource { Title = "Çizimler" };

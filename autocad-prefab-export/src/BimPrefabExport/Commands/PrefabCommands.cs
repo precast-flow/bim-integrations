@@ -22,24 +22,38 @@ public class PrefabCommands
         PrefabPalette.EnsureShown();
     }
 
+    [CommandMethod("BIM_PREFAB_LOGIN")]
+    public void ShowPrecastLogin()
+    {
+        if (PrecastFlowSessionManager.ShowLoginDialog(null))
+        {
+            var doc = AcadApp.DocumentManager.MdiActiveDocument;
+            doc?.Editor.WriteMessage("\n[BIM_PREFAB] PrecastFlow girişi başarılı.");
+            PrefabPalette.TryRefresh();
+        }
+    }
+
     [CommandMethod("BIM_PREFAB_RECT_POLY")]
     public void RectPolyAssign()
     {
         var doc = AcadApp.DocumentManager.MdiActiveDocument;
         if (doc is null)
-            return;
-
-        if (!PrefabUiSession.SelectedProductId.HasValue)
         {
-            doc.Editor.WriteMessage("\n[BIM_PREFAB] Önce paletten bir ürün seçin.");
+            PrefabPalette.EndInteractivePick();
             return;
         }
 
-        DrawingInitService.EnsureInit(doc);
-        var id = PrefabUiSession.SelectedProductId.Value;
         PrefabPalette.BeginInteractivePick();
         try
         {
+            if (!PrefabUiSession.SelectedProductId.HasValue)
+            {
+                doc.Editor.WriteMessage("\n[BIM_PREFAB] Önce paletten bir ürün seçin.");
+                return;
+            }
+
+            DrawingInitService.EnsureInit(doc);
+            var id = PrefabUiSession.SelectedProductId.Value;
             var count = RectangleLinkService.AssignByClosedPolyline(doc, id, PrefabUiSession.DefaultRole, out var err);
             if (err is not null)
                 doc.Editor.WriteMessage("\n[BIM_PREFAB] " + err);

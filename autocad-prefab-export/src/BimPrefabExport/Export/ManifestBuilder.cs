@@ -110,7 +110,7 @@ public static class ManifestBuilder
                 Code = m.Code,
                 Name = string.IsNullOrWhiteSpace(m.Description) ? m.Code : m.Description,
                 Quantity = m.Quantity,
-                Unit = m.Unit,
+                Unit = unit,
                 Notes = m.Notes,
                 MaterialCatalogCode = m.MaterialCatalogCode,
                 VolumeM3 = volumeM3,

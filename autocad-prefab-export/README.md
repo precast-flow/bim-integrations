@@ -31,12 +31,65 @@ AutoCAD için .NET eklentisi (bu repo dalı **net10.0-windows** + **x64**, AutoC
 
 ## Derleme
 
+**Her kod değişikliğinden sonra** Release derlemesini çalıştırın (WPF/WinForms belirsizlik hataları ve derleme kırılmalarını erken yakalamak için).
+
+Build/clean betikleri **plugin kökünde** (`bim-integrations/autocad-prefab-export/scripts/`). `src/BimPrefabExport` içinde çalışıyorsanız aynı komutlar için yerel `scripts/` sarmalayıcıları da vardır.
+
+### Plugin kökünden (`bim-integrations/autocad-prefab-export`)
+
+```powershell
+.\scripts\build.ps1
+```
+
 ```bash
-cd src/BimPrefabExport
+./scripts/build.sh
+```
+
+### Proje dizininden (`src/BimPrefabExport`)
+
+```bash
 dotnet build -c Release -p:Platform=x64
 ```
 
-Çıktı: `bin/x64/Release/net10.0-windows/BimPrefabExport.dll`  
+```powershell
+.\scripts\build.ps1
+```
+
+```bash
+./scripts/build.sh
+```
+
+(Alternatif: `..\..\scripts\build.ps1` veya `../../scripts/build.sh`)
+
+**Temiz derleme (duplicate CS0579 / CS0101 hatalarından sonra):**
+
+Plugin kökü:
+
+```powershell
+.\scripts\clean.ps1
+.\scripts\build.ps1
+```
+
+```bash
+./scripts/clean.sh && ./scripts/build.sh
+```
+
+`src/BimPrefabExport` içinden:
+
+```powershell
+.\scripts\clean.ps1
+.\scripts\build.ps1
+```
+
+```bash
+./scripts/clean.sh && ./scripts/build.sh
+```
+
+**Parallels (Mac paylaşımlı klasör):** `C:\Mac\...` altında `obj`/`bin` yazma izni sorunları olabilir. Proje otomatik olarak tüm ara dosyaları (WPF `_wpftmp` dahil) tek köke yazar: `%LOCALAPPDATA%\BimPrefabExport\build\`. Çıktı DLL: `%LOCALAPPDATA%\BimPrefabExport\build\bin\x64\Release\net10.0-windows\BimPrefabExport.dll`
+
+Zorla yönlendirme: `dotnet build -p:BimPrefabRedirectBuildOutput=true`
+
+Çıktı (doğrudan Windows diskinde build): `bin/x64/Release/net10.0-windows/BimPrefabExport.dll`  
 Kilit için alternatif: `-p:OutputPath=...\artifacts\Release\net10.0-windows\`
 
 ## Yükleme (AutoCAD)
@@ -52,3 +105,44 @@ Kilit için alternatif: `-p:OutputPath=...\artifacts\Release\net10.0-windows\`
 
 - Şema: [schemas/manifest.v1.json](schemas/manifest.v1.json)
 - Örnek: [samples/example-manifest.json](samples/example-manifest.json)
+
+## PrecastFlow sunucu senkronu
+
+Ribbon: **PrecastFlow'a bağlan** veya palet → **Giriş yap…** (modal login penceresi).
+
+### Ağ (Parallels)
+
+- Mac'te API: `dotnet run --launch-profile http` (`0.0.0.0:5255`)
+- Windows AutoCAD varsayılan API: `http://10.211.55.2:5255` (Parallels Mac host)
+- Override: `PRECASTFLOW_API_URL` veya `PRECASTFLOW_PARALLELS_HOST`
+
+### Giriş
+
+- **Endpoint:** `POST {API}/api/auth/login`
+- **Seed kullanıcı:** `admin@precastflow.local` / `ChangeMe123!`
+- **Seed proje:** `DEMO-001 — Demo Prefab Projesi`
+- Oturum: `%LOCALAPPDATA%\BimPrefabExport\session.dat` (DPAPI)
+
+### Sync akışı
+
+| Aksiyon | Davranış |
+|---------|----------|
+| **Kaydet** | DWG + otomatik sunucuya push (giriş + proje seçiliyse) |
+| **Sunucuya gönder** | Tüm çizim ürünlerini toplu push |
+| **Sunucudan güncelle** | Sunucu ürünlerini DWG registry ile birleştir |
+| Proje seçimi | Otomatik pull + merge |
+
+Çakışmada modal: Sunucuyu kullan / Yereli kullan / Atla.
+
+PDF: `POST /api/bim/projects/{projectId}/products/{productId}/pdf` (Kaydet/push sonrası).
+
+### Eleman kimlik kataloğu
+
+Tipoloji / eleman tipi / boyut alanları **gömülü JSON içermez**. Giriş sonrası OData katalog (`ElementIdentityCatalogLoader`) ve firma tipoloji ayarları API üzerinden yüklenir. Katalog yüklenmeden Tipoloji sekmesi devre dışı kalır.
+
+### Manuel test
+
+1. Backend Mac'te çalışsın; AutoCAD VM'de API = Mac IP
+2. NETLOAD → **PrecastFlow'a bağlan** → giriş → `DEMO-001` seç
+3. Ürün oluştur → **Kaydet** → `project_products` tablosunu kontrol et
+4. **Sunucudan güncelle** ile web'den eklenen ürünlerin geldiğini doğrula

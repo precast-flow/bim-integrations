@@ -82,11 +82,11 @@ public sealed class ProductRecord
     [JsonPropertyName("plotStyleSheet")]
     public string? PlotStyleSheet { get; set; }
 
-    /// <summary>Eski kayıtlar: COLUMN, WALL, OTHER, … (categories.json v1). Yeni kayıtta genelde boş.</summary>
+    /// <summary>Eski kayıtlar: COLUMN, WALL, OTHER, … (legacy IFC). Yeni kayıtta genelde boş.</summary>
     [JsonPropertyName("productCategoryId")]
     public string? ProductCategoryId { get; set; }
 
-    /// <summary>Eleman tipi (kolon, kiriş, …) — <c>categories.json</c> <c>elementTypes</c>.</summary>
+    /// <summary>Eleman tipi (kolon, kiriş, …) — PrecastFlow element identity kataloğu.</summary>
     [JsonPropertyName("prefabElementTypeId")]
     public string? PrefabElementTypeId { get; set; }
 
@@ -101,6 +101,34 @@ public sealed class ProductRecord
     /// <summary>Ürün notu (PrecastFlow <c>note</c>).</summary>
     [JsonPropertyName("note")]
     public string Note { get; set; } = "";
+
+    /// <summary>PrecastFlow sunucu ürün kimliği (OData ProjectProducts.id).</summary>
+    [JsonPropertyName("serverProductId")]
+    public Guid? ServerProductId { get; set; }
+
+    /// <summary>Yerel kayıt zamanı (çakışma çözümü).</summary>
+    [JsonPropertyName("localUpdatedAtUtc")]
+    public DateTime? LocalUpdatedAtUtc { get; set; }
+
+    /// <summary>synced | pending_push | conflict</summary>
+    [JsonPropertyName("syncStatus")]
+    public string? SyncStatus { get; set; }
+
+    /// <summary>Son sunucuya gönderim (commit) anındaki içerik özeti; dirty takibi için.</summary>
+    [JsonPropertyName("lastCommittedContentHash")]
+    public string? LastCommittedContentHash { get; set; }
+
+    /// <summary>Son başarılı sunucu commit zamanı (UTC).</summary>
+    [JsonPropertyName("lastCommittedAtUtc")]
+    public DateTime? LastCommittedAtUtc { get; set; }
+
+    /// <summary>Son commit anındaki ürün anlık görüntüsü (alan diff özeti için).</summary>
+    [JsonPropertyName("lastCommittedSnapshotJson")]
+    public string? LastCommittedSnapshotJson { get; set; }
+
+    /// <summary>Sunucudaki çizim revizyon geçmişi (pull / patch sonrası güncellenir).</summary>
+    [JsonPropertyName("serverDrawingRevisions")]
+    public List<ServerDrawingRevision> ServerDrawingRevisions { get; set; } = new();
 
     public static string Serialize(ProductRecord record)
     {

@@ -1,6 +1,33 @@
 <Project>
   <PropertyGroup>
+    <!-- macOS/Linux: net*-windows hedefini cross-compile etmek icin gerekli -->
+    <EnableWindowsTargeting Condition="'$(EnableWindowsTargeting)' == ''">true</EnableWindowsTargeting>
     <!-- Override: dotnet build -p:AcadInstallPath="C:\Program Files\Autodesk\AutoCAD 2022" -->
-    <AcadInstallPath Condition="'$(AcadInstallPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</AcadInstallPath>
+    <AcadInstallPath Condition="'$(AcadInstallPath)' == '' and '$(OS)' == 'Windows_NT'">C:\Program Files\Autodesk\AutoCAD 2027</AcadInstallPath>
+    <AcadInstallPath Condition="'$(AcadInstallPath)' == '' and '$(OS)' != 'Windows_NT'">$(MSBuildThisFileDirectory)lib/acad</AcadInstallPath>
   </PropertyGroup>
+
+  <!-- Parallels: Mac paylasimli klasor (C:\Mac\...) uzerinde obj/bin yazma izni sorun cikarir.
+       Tek bir obj/bin koku kullan; $(MSBuildProjectName) ekleme — WPF _wpftmp farkli adla ayri alt klasore
+       duser ve hem LOCALAPPDATA hem src\...\obj uretimleri birlikte derlenir (CS0579/CS0101/CS0102). -->
+  <PropertyGroup Condition="'$(BimPrefabRedirectBuildOutput)' == '' and '$(OS)' == 'Windows_NT' and $([System.String]::Copy('$(MSBuildProjectDirectory)').StartsWith('C:\Mac\'))">
+    <BimPrefabRedirectBuildOutput>true</BimPrefabRedirectBuildOutput>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BimPrefabRedirectBuildOutput)' == 'true'">
+    <BaseIntermediateOutputPath>$(LOCALAPPDATA)\BimPrefabExport\build\obj\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(LOCALAPPDATA)\BimPrefabExport\build\obj\</MSBuildProjectExtensionsPath>
+    <BaseOutputPath>$(LOCALAPPDATA)\BimPrefabExport\build\bin\</BaseOutputPath>
+    <!-- Eski src\...\obj dosyalari glob ile derlemeye girmesin -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(MSBuildProjectDirectory)\obj\**;$(MSBuildProjectDirectory)\bin\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <Target Name="EnsureAcadManagedDllsPresent" BeforeTargets="ResolveAssemblyReferences">
+    <PropertyGroup>
+      <_AcCoreMgd>$(AcadInstallPath)/AcCoreMgd.dll</_AcCoreMgd>
+    </PropertyGroup>
+    <Error
+      Condition="!Exists('$(_AcCoreMgd)')"
+      Text="AutoCAD managed API DLL'leri bulunamadi: $(_AcCoreMgd). Bu eklenti Windows + AutoCAD gerektirir. Mac'te derlemek icin Windows makineden lib/acad klasorune AcCoreMgd.dll, AcDbMgd.dll, AcMgd.dll ve AdWindows.dll kopyalayin (ObjectARX SDK veya AutoCAD kurulum dizini)." />
+  </Target>
 </Project>

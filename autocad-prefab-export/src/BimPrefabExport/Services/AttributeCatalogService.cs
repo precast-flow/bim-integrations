@@ -1,14 +1,12 @@
-using System.Reflection;
-using System.Text.Json;
 using BimPrefabExport.Core;
 using BimPrefabExport.Schema;
 
 namespace BimPrefabExport.Services;
 
-/// <summary>Gömülü <c>categories.json</c> — eleman tipleri, tipolojiler ve boyut alanları.</summary>
+/// <summary>PrecastFlow API element kimlik kataloğu — eleman tipleri, tipolojiler ve boyut alanları.</summary>
 internal sealed class AttributeCatalogService
 {
-    private static readonly Lazy<AttributeCatalogService> Lazy = new(Load);
+    private static AttributeCatalogService _instance = CreateEmpty();
 
     private readonly PrefabCatalogRoot _root;
     private readonly Dictionary<string, TypologyCatalogDefinition> _typologiesById;
@@ -34,7 +32,19 @@ internal sealed class AttributeCatalogService
         }
     }
 
-    public static AttributeCatalogService Default => Lazy.Value;
+    public static AttributeCatalogService Default => _instance;
+
+    public static bool IsCatalogLoaded =>
+        _instance._root.ElementTypes.Count > 0 && _instance._root.Typologies.Count > 0;
+
+    public static void InstallRemoteCatalog(PrefabCatalogRoot root) =>
+        _instance = new AttributeCatalogService(root);
+
+    public static void ClearRemoteCatalog()
+    {
+        _instance = CreateEmpty();
+        FirmTypologySettingsCache.Clear();
+    }
 
     public IReadOnlyList<ElementTypeDefinition> ElementTypes => _root.ElementTypes;
 
@@ -107,7 +117,7 @@ internal sealed class AttributeCatalogService
         return _typologiesById.TryGetValue(id.Trim(), out var t) ? t : null;
     }
 
-    /// <summary><c>categories.json</c> içindeki sırayı koruyarak <paramref name="elementTypeId"/> ile eşleşen tipolojiler.</summary>
+    /// <summary>Katalog sırasını koruyarak <paramref name="elementTypeId"/> ile eşleşen görünür tipolojiler.</summary>
     public IReadOnlyList<TypologyCatalogDefinition> GetTypologiesForElementType(string? elementTypeId)
     {
         if (string.IsNullOrWhiteSpace(elementTypeId))
@@ -116,22 +126,47 @@ internal sealed class AttributeCatalogService
         var list = new List<TypologyCatalogDefinition>();
         foreach (var t in _root.Typologies)
         {
-            if (string.Equals(t.ElementTypeId, eid, StringComparison.OrdinalIgnoreCase))
-                list.Add(t);
+            if (!string.Equals(t.ElementTypeId, eid, StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (!IsTypologyVisible(t.Id))
+                continue;
+            list.Add(t);
         }
 
         return list;
     }
 
-    /// <summary>Tipoloji <see cref="TypologyCatalogDefinition.IdentifyingDimensions"/> sırasına göre alanlar.</summary>
-    public IReadOnlyList<AttributeFieldDefinition> GetAttributeFieldsForTypology(string? typologyId)
+    public bool IsTypologyVisible(string? typologyId)
     {
         var t = TryGetTypology(typologyId);
         if (t is null)
+            return false;
+        var firm = FirmTypologySettingsCache.TryGet(t.Id);
+        if (firm?.ShowInUserFilterOverride is { } overrideVisible)
+            return overrideVisible;
+        return t.ShowInUserFilter;
+    }
+
+    public IReadOnlyList<string> GetEffectiveIdentifyingDimensions(string? typologyId)
+    {
+        var t = TryGetTypology(typologyId);
+        if (t is null)
+            return Array.Empty<string>();
+        var firm = FirmTypologySettingsCache.TryGet(t.Id);
+        if (firm?.IdentifyingDimensionCodes is { Count: > 0 } codes)
+            return codes;
+        return t.IdentifyingDimensions;
+    }
+
+    /// <summary>Tipoloji effective boyut listesine göre alanlar.</summary>
+    public IReadOnlyList<AttributeFieldDefinition> GetAttributeFieldsForTypology(string? typologyId)
+    {
+        var dimKeys = GetEffectiveIdentifyingDimensions(typologyId);
+        if (dimKeys.Count == 0)
             return Array.Empty<AttributeFieldDefinition>();
 
         var list = new List<AttributeFieldDefinition>();
-        foreach (var dimKey in t.IdentifyingDimensions)
+        foreach (var dimKey in dimKeys)
         {
             if (string.IsNullOrWhiteSpace(dimKey))
                 continue;
@@ -199,6 +234,15 @@ internal sealed class AttributeCatalogService
 
         TryMigrateLegacyIfcProductCategory(record);
 
+        if (string.IsNullOrWhiteSpace(record.PrefabElementTypeId)
+            && !string.IsNullOrWhiteSpace(record.PrefabTypologyId)
+            && TryGetTypology(record.PrefabTypologyId) is { ElementTypeId: { Length: > 0 } typoEtId })
+        {
+            record.PrefabElementTypeId = typoEtId.Trim();
+            record.ElementCategoryId ??= GetCategoryIdForElementType(typoEtId);
+            return;
+        }
+
         if (!string.IsNullOrWhiteSpace(record.PrefabElementTypeId)
             && !string.IsNullOrWhiteSpace(record.PrefabTypologyId))
         {
@@ -244,23 +288,5 @@ internal sealed class AttributeCatalogService
             record.PrefabTypologyId = GetTypologiesForElementType(elementTypeId).FirstOrDefault()?.Id;
     }
 
-    private static AttributeCatalogService Load()
-    {
-        var asm = Assembly.GetExecutingAssembly();
-        var name = asm.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("categories.json", StringComparison.OrdinalIgnoreCase));
-        if (name is null)
-            return new AttributeCatalogService(new PrefabCatalogRoot());
-
-        using var s = asm.GetManifestResourceStream(name);
-        if (s is null)
-            return new AttributeCatalogService(new PrefabCatalogRoot());
-
-        var root = JsonSerializer.Deserialize<PrefabCatalogRoot>(s, JsonOptions);
-        return new AttributeCatalogService(root ?? new PrefabCatalogRoot());
-    }
-
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-    };
+    private static AttributeCatalogService CreateEmpty() => new(new PrefabCatalogRoot());
 }

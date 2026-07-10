@@ -6,7 +6,7 @@ namespace BimPrefabExport.Schema;
 
 
 
-/// <summary><c>categories.json</c> — bina eleman tipi (kolon, kiriş, …), tipolojiler ve boyut alanları.</summary>
+/// <summary>PrecastFlow API element kimlik kataloğu — bina eleman tipi (kolon, kiriş, …), tipolojiler ve boyut alanları.</summary>
 
 public sealed class PrefabCatalogRoot
 
@@ -124,6 +124,10 @@ public sealed class TypologyCatalogDefinition
 
     public List<string> IdentifyingDimensions { get; set; } = new();
 
+    [JsonPropertyName("showInUserFilter")]
+
+    public bool ShowInUserFilter { get; set; } = true;
+
 }
 
 
@@ -147,6 +151,14 @@ public sealed class AttributeFieldDefinition
     [JsonPropertyName("type")]
 
     public string Type { get; set; } = "string";
+
+    [JsonPropertyName("unitCategoryCode")]
+
+    public string? UnitCategoryCode { get; set; }
+
+    [JsonPropertyName("unit")]
+
+    public string? Unit { get; set; }
 
 }
 

@@ -15,8 +15,25 @@ public sealed class ProductPaletteRow : INotifyPropertyChanged
 
     public ProductRecord Record { get; }
 
-    public string DisplayText =>
-        $"{Record.DisplayName}  |  {Record.Code}  |  rev {Record.Revision}";
+    public string DisplayText
+    {
+        get
+        {
+            var dirty = ProductDirtyTracker.IsDirty(Record) ? " ●" : "";
+            return $"{Record.DisplayName}  |  {Record.Code}  |  rev {Record.Revision}{dirty}";
+        }
+    }
+
+    public bool IsDirty => ProductDirtyTracker.IsDirty(Record);
+
+    public void RefreshDisplay()
+    {
+        OnPropertyChanged(nameof(DisplayText));
+        OnPropertyChanged(nameof(IsDirty));
+        OnPropertyChanged(nameof(DrawingReferenceCaption));
+        OnPropertyChanged(nameof(PdfDrawingSummary));
+        OnPropertyChanged(nameof(CategorySummary));
+    }
 
     /// <summary>Tablo sütunu: çizim (polyline) referans sayısı.</summary>
     public string DrawingReferenceCaption

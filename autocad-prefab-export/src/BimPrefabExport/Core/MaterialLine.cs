@@ -26,4 +26,8 @@ public sealed class MaterialLine
     /// <summary>Malzeme kataloğu kodu (PrecastFlow eşlemesi).</summary>
     [JsonPropertyName("materialCatalogCode")]
     public string MaterialCatalogCode { get; set; } = "";
+
+    /// <summary>Beton satırları için hesaplanan satır ağırlığı (kg); yalnızca palet gösterimi.</summary>
+    [JsonIgnore]
+    public double? LineWeightKg { get; set; }
 }

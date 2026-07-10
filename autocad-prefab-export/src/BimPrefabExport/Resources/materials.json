@@ -1,0 +1,80 @@
+{
+  "materials": [
+    {
+      "id": "mat-def-rebar-b500c",
+      "code": "REBAR-B500C",
+      "name": "B500C Donatı çeliği",
+      "category": "rebar",
+      "categoryLabel": "Donatı çeliği",
+      "defaultUnit": "ad",
+      "description": "Betonarme donatı çubuğu — çap, şekil, sınıf, gelişmiş boy ve adet."
+    },
+    {
+      "id": "mat-def-concrete-c35",
+      "code": "CONC-C35",
+      "name": "Beton C35/45 (RC-C35-02)",
+      "category": "concrete",
+      "categoryLabel": "Beton",
+      "defaultUnit": "m³",
+      "concreteRecipeId": "RC-C35-02",
+      "specification": "RC-C35-02 · C35/45",
+      "unitWeightKgPerM3": 3621.2,
+      "description": "Kalite beton reçetesine bağlı beton tanımı — hacim ürün BOM satırında girilir."
+    },
+    {
+      "id": "mat-def-anchor-set",
+      "code": "HW-ANCHOR",
+      "name": "Ankraj seti",
+      "category": "hardware",
+      "categoryLabel": "Bağlantı donanımı",
+      "defaultUnit": "ad",
+      "description": "Bağlantı ankrajı — tip, boyut, adet."
+    },
+    {
+      "id": "mat-def-pvc-sleeve",
+      "code": "SLV-PVC",
+      "name": "PVC geçiş",
+      "category": "sleeve",
+      "categoryLabel": "Geçiş / manşon",
+      "defaultUnit": "ad",
+      "description": "Geçiş borusu / manşon."
+    },
+    {
+      "id": "mat-def-connection-plate",
+      "code": "PLT-CONN",
+      "name": "Bağlantı plakası",
+      "category": "plate",
+      "categoryLabel": "Levha / plaka",
+      "defaultUnit": "ad",
+      "description": "Kaynaklı / cıvatalı bağlantı levhası."
+    },
+    {
+      "id": "mat-def-epdm-profile",
+      "code": "PRF-EPDM",
+      "name": "EPDM profil",
+      "category": "profile",
+      "categoryLabel": "Profil",
+      "defaultUnit": "m",
+      "description": "Conta / köşe profili."
+    },
+    {
+      "id": "mat-def-prestress-wire",
+      "code": "PST-WIRE",
+      "name": "Ön gerilme teli",
+      "category": "prestress",
+      "categoryLabel": "Ön gerilme",
+      "defaultUnit": "ad",
+      "description": "Öngerilme çeliği — çap, mukavemet, adet."
+    }
+  ],
+  "steelGrades": ["B500C", "B420C", "S420"],
+  "rebarShapes": [
+    { "id": "straight", "label": "Düz" },
+    { "id": "stirrup", "label": "Etriye" },
+    { "id": "hook", "label": "Kancalı" },
+    { "id": "l_bar", "label": "L" },
+    { "id": "u_bar", "label": "U" },
+    { "id": "crank", "label": "Kırımlı" },
+    { "id": "custom", "label": "Özel" }
+  ]
+}

@@ -20,25 +20,25 @@
 
   <ItemGroup>
     <Reference Include="AcCoreMgd">
-      <HintPath>$(AcadInstallPath)\AcCoreMgd.dll</HintPath>
+      <HintPath>$(AcadInstallPath)/AcCoreMgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="AcDbMgd">
-      <HintPath>$(AcadInstallPath)\AcDbMgd.dll</HintPath>
+      <HintPath>$(AcadInstallPath)/AcDbMgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="AcMgd">
-      <HintPath>$(AcadInstallPath)\AcMgd.dll</HintPath>
+      <HintPath>$(AcadInstallPath)/AcMgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>$(AcadInstallPath)\AdWindows.dll</HintPath>
+      <HintPath>$(AcadInstallPath)/AdWindows.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\categories.json" />
+    <EmbeddedResource Include="Resources\materials.json" />
   </ItemGroup>
 
   <ItemGroup>

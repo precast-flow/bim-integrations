@@ -93,7 +93,17 @@ export type IfcPredefinedType =
 
 export type UnitSystem = 'metric' | 'imperial' | 'mixed'
 
-export type DimensionUnit = 'mm' | 'cm' | 'm' | 'in' | 'ft'
+export type DimensionUnit = string
+
+export type IdentifyingDimension = {
+  id: string
+  nameTr: string
+  nameEn: string
+  unitCategoryCode: string
+  unit: DimensionUnit
+  required: boolean
+  description?: string
+}
 
 // ============================================================================
 // 1. SISTEM KATALOG (immutable)
@@ -133,15 +143,6 @@ export type Typology = {
   defaultSizeFormatId: string
   geometryHint?: GeometryHint
   notes?: string
-}
-
-export type IdentifyingDimension = {
-  id: string
-  nameTr: string
-  nameEn: string
-  unit: DimensionUnit
-  required: boolean
-  description?: string
 }
 
 export type SizeFormat = {

@@ -21,6 +21,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="*" MinHeight="320" />
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
@@ -33,11 +34,20 @@
                FontWeight="SemiBold"
                Foreground="#123A5C" />
 
+    <Border x:Name="ServerSyncPanelHost"
+            Grid.Row="1"
+            Margin="0,0,0,8"
+            Padding="10,8"
+            Background="White"
+            BorderBrush="#C8D0D8"
+            BorderThickness="1"
+            CornerRadius="4" />
+
     <WrapPanel x:Name="ToolbarPanel"
-               Grid.Row="1"
+               Grid.Row="2"
                Margin="0,0,0,8" />
 
-    <Grid Grid.Row="2" Margin="0,0,0,6">
+    <Grid Grid.Row="3" Margin="0,0,0,6">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="280" MinWidth="220" />
         <ColumnDefinition Width="12" />
@@ -134,24 +144,22 @@
                   <RowDefinition Height="Auto" />
                   <RowDefinition Height="Auto" />
                   <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Görünen ad" VerticalAlignment="Center" Margin="0,6" />
-                <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Kod" VerticalAlignment="Center" Margin="0,6" />
+                <TextBox x:Name="CodeBox" Grid.Row="0" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Kod" VerticalAlignment="Center" Margin="0,6" />
-                <TextBox x:Name="CodeBox" Grid.Row="1" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Adet" VerticalAlignment="Center" Margin="0,6" />
+                <TextBox x:Name="QtyBox" Grid.Row="1" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Adet" VerticalAlignment="Center" Margin="0,6" />
-                <TextBox x:Name="QtyBox" Grid.Row="2" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Revizyon" VerticalAlignment="Center" Margin="0,6" />
+                <TextBox x:Name="RevisionBox" Grid.Row="2" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Revizyon" VerticalAlignment="Center" Margin="0,6" />
-                <TextBox x:Name="RevisionBox" Grid.Row="3" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Not" VerticalAlignment="Center" Margin="0,6" />
+                <TextBox x:Name="NoteBox" Grid.Row="3" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
 
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Not" VerticalAlignment="Center" Margin="0,6" />
-                <TextBox x:Name="NoteBox" Grid.Row="4" Grid.Column="1" Margin="0,4" VerticalContentAlignment="Center" />
-
-                <TextBlock Grid.Row="5"
+                <TextBlock Grid.Row="4"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="PDF çizimleri (her çit alanı — ayrı PDF)"
@@ -159,12 +167,12 @@
                            Foreground="#123A5C"
                            Margin="0,12,0,4" />
 
-                <TextBlock Grid.Row="6"
+                <TextBlock Grid.Row="5"
                            Grid.Column="0"
                            Text="Çizim seç"
                            VerticalAlignment="Top"
                            Margin="0,6,8,0" />
-                <Grid Grid.Row="6"
+                <Grid Grid.Row="5"
                       Grid.Column="1"
                       Margin="0,4">
                   <Grid.ColumnDefinitions>
@@ -186,13 +194,13 @@
                           Click="OnRemovePdfDrawingClick" />
                 </Grid>
 
-                <TextBlock Grid.Row="7"
+                <TextBlock Grid.Row="6"
                            Grid.Column="0"
                            Text="PDF çizim adı"
                            VerticalAlignment="Center"
                            Margin="0,6"
                            ToolTip="Dosya adı: kod_çizimAdı.pdf; PDF çizim rev. &gt; 0 ise sonuna _r{n} eklenir." />
-                <StackPanel Grid.Row="7" Grid.Column="1" Margin="0,4">
+                <StackPanel Grid.Row="6" Grid.Column="1" Margin="0,4">
                   <TextBox x:Name="PdfDrawingTitleBox"
                            VerticalContentAlignment="Center"
                            TextChanged="OnPdfDrawingTitleBoxTextChanged" />
@@ -204,34 +212,34 @@
                              Text="" />
                 </StackPanel>
 
-                <TextBlock Grid.Row="8"
+                <TextBlock Grid.Row="7"
                            Grid.Column="0"
                            Text="PDF çizim rev."
                            VerticalAlignment="Center"
                            Margin="0,6"
                            ToolTip="Tam sayı ≥ 0. &gt; 0 olduğunda dışa aktarılan dosya adına _r{n} eklenir (aynı çizim adıyla sürüm ayırımı)." />
                 <TextBox x:Name="PdfDrawingRevisionBox"
-                         Grid.Row="8"
+                         Grid.Row="7"
                          Grid.Column="1"
                          Margin="0,4"
                          VerticalContentAlignment="Center"
                          LostFocus="OnPdfDrawingRevisionBoxLostFocus" />
 
-                <TextBlock Grid.Row="9"
+                <TextBlock Grid.Row="8"
                            Grid.Column="0"
                            Text="PDF kağıt"
                            VerticalAlignment="Center"
                            Margin="0,6"
                            ToolTip="Seçili çizim alanı için kağıt boyutu." />
                 <ComboBox x:Name="PaperSizeCombo"
-                          Grid.Row="9"
+                          Grid.Row="8"
                           Grid.Column="1"
                           Margin="0,4"
                           VerticalContentAlignment="Center"
                           IsEditable="False"
                           SelectionChanged="OnPdfDrawingPaperSizeChanged" />
 
-                <StackPanel Grid.Row="10"
+                <StackPanel Grid.Row="9"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Orientation="Horizontal"
@@ -252,7 +260,23 @@
                                Checked="OnPlotOrientationChanged" />
                 </StackPanel>
 
-                <TextBlock Grid.Row="11"
+                <TextBlock Grid.Row="10"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Text="Sunucu çizim geçmişi"
+                           FontWeight="SemiBold"
+                           Foreground="#123A5C"
+                           Margin="0,8,0,4" />
+
+                <ListBox x:Name="ServerDrawingRevisionsList"
+                         Grid.Row="11"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         MinHeight="72"
+                         MaxHeight="140"
+                         Margin="0,0,0,4" />
+
+                <TextBlock Grid.Row="12"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="Çizim sınırı önizlemesi (seçili çit)"
@@ -261,7 +285,7 @@
                            Margin="0,8,0,4" />
 
                 <Border x:Name="LinkFencePreviewHost"
-                        Grid.Row="12"
+                        Grid.Row="13"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         MinHeight="168"
@@ -289,7 +313,7 @@
                 </Border>
 
                 <TextBlock x:Name="FencePreviewCaptionText"
-                           Grid.Row="13"
+                           Grid.Row="14"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Margin="0,6,0,0"
@@ -304,7 +328,8 @@
         <TabItem Header="Tipoloji">
           <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4,8">
             <StackPanel>
-              <TextBlock Text="Katalog (categories.json): eleman tipi ve tipoloji."
+              <TextBlock x:Name="PaletteCatalogHintText"
+                         Text="Eleman kimlik kataloğu PrecastFlow sunucusundan yüklenir. Tipoloji sekmesini kullanmak için giriş yapın."
                          FontWeight="SemiBold"
                          Foreground="#123A5C"
                          Margin="0,0,0,8"
@@ -387,31 +412,7 @@
                       SelectionUnit="FullRow"
                       BorderBrush="#C8D0D8"
                       BorderThickness="1"
-                      Background="White">
-              <DataGrid.Columns>
-                <DataGridTextColumn Header="Kategori"
-                                    Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="*" MinWidth="72" />
-                <DataGridTextColumn Header="Kod"
-                                    Binding="{Binding Code, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="80" />
-                <DataGridTextColumn Header="Katalog kodu"
-                                    Binding="{Binding MaterialCatalogCode, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="96" />
-                <DataGridTextColumn Header="Açıklama"
-                                    Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="2*" MinWidth="80" />
-                <DataGridTextColumn Header="Miktar"
-                                    Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="72" />
-                <DataGridTextColumn Header="Birim"
-                                    Binding="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="56" />
-                <DataGridTextColumn Header="Not"
-                                    Binding="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="*" MinWidth="50" />
-              </DataGrid.Columns>
-            </DataGrid>
+                      Background="White" />
           </Grid>
         </TabItem>
 
@@ -452,36 +453,7 @@
                       SelectionUnit="FullRow"
                       BorderBrush="#C8D0D8"
                       BorderThickness="1"
-                      Background="White">
-              <DataGrid.Columns>
-                <DataGridTextColumn Header="Poz"
-                                    Binding="{Binding PozNo, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="48"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="Çap (mm)"
-                                    Binding="{Binding DiameterMm, Converter={StaticResource NullableDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="80" />
-                <DataGridTextColumn Header="Adet"
-                                    Binding="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="72" />
-                <DataGridTextColumn Header="H (mm)"
-                                    Binding="{Binding LengthH_mm, Converter={StaticResource NullableDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="88" />
-                <DataGridTextColumn Header="L (mm)"
-                                    Binding="{Binding LengthL_mm, Converter={StaticResource NullableDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="88" />
-                <DataGridTextColumn Header="Çelik"
-                                    Binding="{Binding SteelGrade, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="64" />
-                <DataGridTextColumn Header="kg"
-                                    Binding="{Binding TotalWeightKg, Converter={StaticResource NullableDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="64"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="Not"
-                                    Binding="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
-                                    Width="*" MinWidth="50" />
-              </DataGrid.Columns>
-            </DataGrid>
+                      Background="White" />
           </Grid>
         </TabItem>
       </TabControl>
@@ -489,7 +461,7 @@
     </Grid>
 
     <TextBlock x:Name="StatusText"
-               Grid.Row="3"
+               Grid.Row="4"
                Margin="0,4,0,0"
                FontSize="12"
                Foreground="#323232"
